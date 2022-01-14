@@ -1,0 +1,191 @@
+\documentclass[a4paper,
+    11pt,
+    headings=small,
+    ngerman,
+    listof=totoc,
+    numbers=noenddot]{scrreprt}[2021/11/13]
+\usepackage{ifxetex,ifluatex}
+\ifcase \ifxetex 1\else\ifluatex 1\else 0\fi\fi\usepackage[utf8]{inputenc}\fi
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{lmodern}
+\usepackage{csquotes}
+
+\usepackage[automark,headsepline=.4pt]{scrlayer-scrpage}
+\clearmainofpairofpagestyles
+\pagestyle{scrheadings}
+\renewcommand*{\chaptermarkformat}{%
+	\chaptername~\thechapter\autodot\enskip}
+\ihead{\headmark}
+\setkomafont{pageheadfoot}{}
+\renewcommand*{\sectionmarkformat}{}
+\cfoot{\pagemark}
+\footskip1cm
+
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=2.5cm]{geometry}
+
+\usepackage{xcolor, soul}
+\definecolor{codebackground}{rgb}{0.95, 0.95, 0.92}
+\definecolor{Black}{rgb}{0, 0, 0}
+
+%%% Für Abkürzungen und Abkürzungsverzeichnis %%%
+\usepackage[printonlyused,withpage]{acronym}
+
+%%% Für Quotes %%%
+\usepackage{url}
+\usepackage[ngerman]{varioref}
+\usepackage{mwe}
+\usepackage{hyperref}% Weil es so in der Frage enthalten war.
+ \hypersetup{%draft, 								% no hyperlinking at all (useful in b/w printouts)
+    colorlinks=true, breaklinks=true,
+    urlcolor=Black, linkcolor=Black, citecolor=Black,
+    linktoc=page, %
+    bookmarksnumbered, bookmarksopenlevel=1, bookmarksdepth = section,%
+    pdfstartview=FitV,
+    }
+\setlength{\parindent}{0em}
+\usepackage{bookmark}% Weil das hyperref deutlich verbesser.
+\usepackage{cleveref}
+\crefname{paragraph}{Abschnitt}{Abschnitt}
+
+%%% Für Textübergreifende Numerierung %%%
+\usepackage{enumitem}
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+%%% Um PDFs einzubinden %%%
+\usepackage{pdfpages}
+
+%%% Um Zahlen mit Einheiten korrekt darstellen %%%
+\usepackage{siunitx}
+\sisetup{
+  locale = DE ,
+  detect-all,
+  binary-units = true
+}
+
+%%% Code schoen darstellen %%%
+\usepackage{listings}
+\lstdefinestyle{MyPythonStyle}{
+  frame=tb, % hrule above and below
+  keepspaces=true,
+  breaklines=true,
+  columns=flexible,
+  basicstyle=\texttt\scriptsize,
+  escapeinside={(*@}{@*)}, % for escaping
+  backgroundcolor=\color{codebackground},
+  showstringspaces=false,
+  language=Python,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{teal},
+  numbers=left, % {none, left, right}
+  firstnumber=1,
+  numberstyle=\scriptsize\color{black},
+  numbersep=5pt,
+  xleftmargin=5.0ex,
+  gobble=-4
+}
+
+%%% Korrekte darstellung fuer Sonderzeichen im Code
+\lstset{literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1
+}
+
+
+%%% Verzeichnisse im Anhang %%%
+\DeclareNewTOC[%
+  owner=\jobname,
+  listname={Inhalt des Anhangs},% Titel des Verzeichnisses
+]{atoc}% Dateierweiterung (a=appendix, toc=table of contents)
+\DeclareNewTOC[%
+  listname={Abbildungen im Anhang},% Titel des Verzeichnisses
+]{alof}% Dateierweiterung (a=appendix, lof=list of figures)
+\DeclareNewTOC[%
+  listname={Tabellen im Anhang},% Titel des Verzeichnisses
+]{alot}% Dateierweiterung (a=appendix, lot=list of tables)
+ 
+\makeatletter
+\newcommand*{\useappendixtocs}{%
+  \renewcommand*{\ext@toc}{atoc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=atoc}%
+  }%
+  \renewcommand*{\ext@figure}{alof}%
+  \renewcommand*{\ext@table}{alot}%
+}
+\newcommand*{\usestandardtocs}{%
+  \renewcommand*{\ext@toc}{toc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=toc}%
+  }%
+  \renewcommand*{\ext@figure}{lof}%
+  \renewcommand*{\ext@table}{lot}%
+}
+\scr@ifundefinedorrelax{ext@toc}{%
+  \newcommand*{\ext@toc}{toc}
+  \renewcommand{\addtocentrydefault}[3]{%
+    \expandafter\tocbasic@addxcontentsline\expandafter{\ext@toc}{#1}{#2}{#3}%
+  }
+}{}
+\makeatother
+ 
+\usepackage{xpatch}
+\xapptocmd\appendix{%
+  \addpart{\appendixname}
+  \useappendixtocs
+}{}{}
+
+%%% Alles bzgl. des Literaturverzeichnisses
+\usepackage[bibencoding=utf8,
+			sortlocale=de,
+			style=numeric,
+			pagetracker=true,
+			autocite=inline,
+			backrefstyle=three+,
+			date=short,
+			sorting=nty,
+			backend=biber]{biblatex}
+\bibliography{Literaturverzeichnis}
+
+%%% urldate in eckigen Klammern %%%
+\DeclareFieldFormat{urldate}{\mkbibbrackets{#1}}
+%%% URL: = Verfügbar unter: %%%
+\DeclareFieldFormat{url}{{Verfügbar unter:}\space\url{#1}}
+%%% Abstand zwischen den Literaturangaben %%%
+\setlength{\bibitemsep}{1.3em}
+%%% statt und ein & %%%
+\renewcommand*{\finalnamedelim}{\space\&\space}
+%%% Nachname, Vorname, immer %%%
+\DeclareNameAlias{sortname}{last-first}
+
+\title{Die hard- und softwaretechnische Implementierung eines CO2-Sensors zur Messung der Raumluftqualität}
+\author{Julius Caesar, Péter Egermann, Paul Görtler, Johannes Leyrer}
+\date{14.01.2022}
+
+\begin{document}
+\maketitle
+
+
+\chapter{Motivation}
+
+\section{Warum interessiert uns die Fragestellung?}
+
+Im Laufe der Corona-Pandemie und der damit verbundenen Ausgangsbeschränkungen musste man sich zunehmen in Innenräumen aufhalten, um der Verbreitung des Virus entgegenzuwirken. Aus diesem Grund musste man sich zwangsweise mit der Luftqualität im Homeoffice und besonders in Büroräumen auseinandersetzen, um das Gesundheitsrisiko zu minimieren und konzentriert arbeiten zu können. Da die Luftqualität durch Menschen meist nur subjektiv wahrgenommen werden kann, benötigt man dafür eine Messstelle. Da die gesundheitlichen Auswirkungen von schlechter Raumluftqualität ausreichend erforscht sind, existieren genügend konkrete Werte zur Orientierung.
+
+\section{Welche Ziele wollen wir erreichen?}
+
+Diese Arbeit soll einen Überblick darüber geben, welche medizinischen Risiken durch eine unzureichende Luftqualität entstehen können und welche positiven Auswirkungen eine ausreichende Versorgung mit Frischluft haben kann.
+
+Danach soll ein grober Leitfaden zur Einrichtung eines CO2-Sensors zur Bestimmung der Luftqualität in Arbeitsräumen erstellt werden. Dabei soll über die Anforderungen an die Hardware, die benötigten Komponenten, die Einbindung in das Netzwerk und die Umsetzung der dazugehörigen Software eingegangen werden. Die Arbeit richtet sich dabei hauptsächlich an technisch versierte Leser, welche bereits grundlegende Kenntnisse in den Bereichen Hard- und Software besitzen.
+
+\end{document}
