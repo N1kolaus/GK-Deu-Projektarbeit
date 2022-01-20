@@ -211,7 +211,7 @@ Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werde
 
 Hinweis: Wird dieser geändert, müssen im \textit{Reader} und im Frontend der Port der API ebenfalls angepasst werden.
 
-Mit dem Öffnen eines Terminal-Fensters im Ordner der API und mittels \texttt{docker-compose up} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Auswirkungen richtig funktioniert kann mittels
+Mit dem Öffnen eines Terminal-Fensters im Ordner der API und mittels \texttt{docker-compose up} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels
 
 \texttt{ipadresseDesPis:8008/api/test}
 
@@ -237,6 +237,13 @@ Soll der \textit{Reader} auf einem anderen Gerät als die API ausgeführt werden
 Nach dem Abspeichern der Datei, kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose up} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der API.
 
 
+\subsection{Einrichten des Frontends}
+
+Um die Daten ansehnlich darstellen zu koennen, kann ein Frontend eingebunden werden. Dazu muss lediglich das Frontend bezogen werden und die docker-compose-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die API läuft ausgetauscht werden.
+
+Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt angepasst werden.
+
+Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose up} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
 
 
 \end{document}
