@@ -205,6 +205,19 @@ Ist die Software installiert und eingerichtet, kann mit der Implementierung der 
 
 \section{Einrichten der Software}
 
+\subsection{Einrichten des Backends}
+
+Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werden können, wird mittels der CO2MonitorAPI realisiert. Hier kann in der docker-compose-Datei der Port bestimmt werden, auf dem die API erreichbar ist.
+
+Hinweis: Wird dieser geändert, müssen im \textit{Reader} und im Frontend der Port der API ebenfalls angepasst werden.
+
+Mit dem Öffnen eines Terminal-Fensters im Ordner der API und mittels \texttt{docker-compose up} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Auswirkungen richtig funktioniert kann mittels
+
+\texttt{ipadresseDesPis:8008/api/test}
+
+getestet werden.
+
+
 \subsection{Einrichten der Lese-Software}
 
 Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Dazu muss die docker-compose-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, muss dieser vorher bestimmt werden, was mit folgendem Befehl in einem Terminal-Fenster funktioniert:
