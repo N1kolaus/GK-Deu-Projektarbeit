@@ -175,6 +175,20 @@
 \begin{document}
 \maketitle
 
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\chapter*{Abkürzungsverzeichnis}
+
+\begin{acronym}[API]
+  \acro{API}{Application Programming Interface}
+\end{acronym}
+
+\newpage
+
 
 \chapter{Motivation}
 
@@ -203,15 +217,23 @@ Um die benötigte Software in Betrieb nehmen zu können, wird folgende Software 
 
 Ist die Software installiert und eingerichtet, kann mit der Implementierung der Auslese- und Verarbeitungssoftware begonnen werden.
 
+
+\section{Zusammenspiel der Softwarekomponenten}
+
+% TODO PAP einfuegen?
+
+
+
+
 \section{Einrichten der Software}
 
 \subsection{Einrichten des Backends}
 
-Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werden können, wird mittels der CO2MonitorAPI realisiert. Hier kann in der docker-compose-Datei der Port bestimmt werden, auf dem die API erreichbar ist.
+Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werden können, wird mittels der CO2MonitorAPI realisiert. Hier kann in der docker-compose-Datei der Port bestimmt werden, auf dem das \ac{API} erreichbar ist.
 
-Hinweis: Wird dieser geändert, müssen im \textit{Reader} und im Frontend der Port der API ebenfalls angepasst werden.
+Hinweis: Wird dieser geändert, müssen im \textit{Reader} und im Frontend der Port der \ac{API} ebenfalls angepasst werden.
 
-Mit dem Öffnen eines Terminal-Fensters im Ordner der API und mittels \texttt{docker-compose up} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels
+Mit dem Öffnen eines Terminal-Fensters im Ordner der \ac{API} und mittels \texttt{docker-compose up} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels
 
 \texttt{ipadresseDesPis:8008/api/test}
 
@@ -232,14 +254,14 @@ Ist der USB-Port bestimmt, kann der vordere Teil der devices, also "\texttt{/dev
 
 % TODO IP-Adresse anpassen? Wenn nicht, Name ueberpruefen.
 
-Soll der \textit{Reader} auf einem anderen Gerät als die API ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der API anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier Ort, in dem sich der Sensor befindet eingetragen werden.
+Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier Ort, in dem sich der Sensor befindet eingetragen werden.
 
-Nach dem Abspeichern der Datei, kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose up} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der API.
+Nach dem Abspeichern der Datei, kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose up} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
 
 
 \subsection{Einrichten des Frontends}
 
-Um die Daten ansehnlich darstellen zu koennen, kann ein Frontend eingebunden werden. Dazu muss lediglich das Frontend bezogen werden und die docker-compose-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die API läuft ausgetauscht werden.
+Um die Daten ansehnlich darstellen zu koennen, kann ein Frontend eingebunden werden. Dazu muss lediglich das Frontend bezogen werden und die docker-compose-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden.
 
 Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt angepasst werden.
 
