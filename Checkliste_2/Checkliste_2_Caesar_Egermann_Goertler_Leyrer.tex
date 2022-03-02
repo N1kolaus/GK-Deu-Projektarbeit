@@ -1,0 +1,255 @@
+\documentclass[a4paper,
+    11pt,
+    headings=small,
+    ngerman,
+    listof=totoc,
+    numbers=noenddot]{scrreprt}[2021/11/13]
+\usepackage{ifxetex,ifluatex}
+\ifcase \ifxetex 1\else\ifluatex 1\else 0\fi\fi\usepackage[utf8]{inputenc}\fi
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{lmodern}
+\usepackage{csquotes}
+
+\usepackage[automark,headsepline=.4pt]{scrlayer-scrpage}
+\clearmainofpairofpagestyles
+\pagestyle{scrheadings}
+\renewcommand*{\chaptermarkformat}{%
+	\chaptername~\thechapter\autodot\enskip}
+\ihead{\headmark}
+\setkomafont{pageheadfoot}{}
+\renewcommand*{\sectionmarkformat}{}
+\cfoot{\pagemark}
+\footskip1cm
+
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=2.5cm]{geometry}
+
+\usepackage{xcolor, soul}
+\definecolor{codebackground}{rgb}{0.95, 0.95, 0.92}
+\definecolor{Black}{rgb}{0, 0, 0}
+
+%%% Für Abkürzungen und Abkürzungsverzeichnis %%%
+\usepackage[printonlyused,withpage]{acronym}
+
+%%% Für Quotes %%%
+\usepackage{url}
+\usepackage[ngerman]{varioref}
+\usepackage{mwe}
+\usepackage{hyperref}% Weil es so in der Frage enthalten war.
+ \hypersetup{%draft, 								% no hyperlinking at all (useful in b/w printouts)
+    colorlinks=true, breaklinks=true,
+    urlcolor=Black, linkcolor=Black, citecolor=Black,
+    linktoc=page, %
+    bookmarksnumbered, bookmarksopenlevel=1, bookmarksdepth = section,%
+    pdfstartview=FitV,
+    }
+\setlength{\parindent}{0em}
+\usepackage{bookmark}% Weil das hyperref deutlich verbesser.
+\usepackage{cleveref}
+\crefname{paragraph}{Abschnitt}{Abschnitt}
+
+%%% Für Textübergreifende Numerierung %%%
+\usepackage{enumitem}
+\renewcommand{\labelenumi}{\alph{enumi})}
+
+%%% Um PDFs einzubinden %%%
+\usepackage{pdfpages}
+
+%%% Um Zahlen mit Einheiten korrekt darstellen %%%
+\usepackage{siunitx}
+\sisetup{
+  locale = DE ,
+  detect-all,
+  binary-units = true
+}
+
+%%% Code schoen darstellen %%%
+\usepackage{listings}
+\lstdefinestyle{MyPythonStyle}{
+  frame=tb, % hrule above and below
+  keepspaces=true,
+  breaklines=true,
+  columns=flexible,
+  basicstyle=\texttt\scriptsize,
+  escapeinside={(*@}{@*)}, % for escaping
+  backgroundcolor=\color{codebackground},
+  showstringspaces=false,
+  language=Python,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{teal},
+  numbers=left, % {none, left, right}
+  firstnumber=1,
+  numberstyle=\scriptsize\color{black},
+  numbersep=5pt,
+  xleftmargin=5.0ex,
+  gobble=-4
+}
+
+%%% Korrekte darstellung fuer Sonderzeichen im Code
+\lstset{literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1
+}
+
+
+%%% Verzeichnisse im Anhang %%%
+\DeclareNewTOC[%
+  owner=\jobname,
+  listname={Inhalt des Anhangs},% Titel des Verzeichnisses
+]{atoc}% Dateierweiterung (a=appendix, toc=table of contents)
+\DeclareNewTOC[%
+  listname={Abbildungen im Anhang},% Titel des Verzeichnisses
+]{alof}% Dateierweiterung (a=appendix, lof=list of figures)
+\DeclareNewTOC[%
+  listname={Tabellen im Anhang},% Titel des Verzeichnisses
+]{alot}% Dateierweiterung (a=appendix, lot=list of tables)
+ 
+\makeatletter
+\newcommand*{\useappendixtocs}{%
+  \renewcommand*{\ext@toc}{atoc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=atoc}%
+  }%
+  \renewcommand*{\ext@figure}{alof}%
+  \renewcommand*{\ext@table}{alot}%
+}
+\newcommand*{\usestandardtocs}{%
+  \renewcommand*{\ext@toc}{toc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=toc}%
+  }%
+  \renewcommand*{\ext@figure}{lof}%
+  \renewcommand*{\ext@table}{lot}%
+}
+\scr@ifundefinedorrelax{ext@toc}{%
+  \newcommand*{\ext@toc}{toc}
+  \renewcommand{\addtocentrydefault}[3]{%
+    \expandafter\tocbasic@addxcontentsline\expandafter{\ext@toc}{#1}{#2}{#3}%
+  }
+}{}
+\makeatother
+ 
+\usepackage{xpatch}
+\xapptocmd\appendix{%
+  \addpart{\appendixname}
+  \useappendixtocs
+}{}{}
+
+%%% Alles bzgl. des Literaturverzeichnisses
+\usepackage[bibencoding=utf8,
+			sortlocale=de,
+			style=numeric,
+			pagetracker=true,
+			autocite=inline,
+			backrefstyle=three+,
+			date=short,
+			sorting=nty,
+			backend=biber]{biblatex}
+\bibliography{Literaturverzeichnis}
+
+%%% urldate in eckigen Klammern %%%
+\DeclareFieldFormat{urldate}{\mkbibbrackets{#1}}
+%%% URL: = Verfügbar unter: %%%
+\DeclareFieldFormat{url}{{Verfügbar unter:}\space\url{#1}}
+%%% Abstand zwischen den Literaturangaben %%%
+\setlength{\bibitemsep}{1.3em}
+%%% statt und ein & %%%
+\renewcommand*{\finalnamedelim}{\space\&\space}
+%%% Nachname, Vorname, immer %%%
+\DeclareNameAlias{sortname}{last-first}
+
+\title{Die hard- und softwaretechnische Implementierung eines CO2-Sensors zur Messung der Raumluftqualität}
+\author{Julius Caesar, Péter Egermann, Paul Görtler, Johannes Leyrer}
+\date{02.03.2022}
+
+\begin{document}
+\maketitle
+
+
+\chapter{Projektorganisation}
+
+\begin{description}
+  \item[Aufgabenverteilung] \
+        \begin{itemize}
+          \item \textbf{Wer übernimmt welche Aufgabe?}
+                \begin{itemize}
+                  \item Johannes: Bereitstellung Hardware und Software
+                  \item Julius: Infos Raspberry Pi und Nutzung als Wifi-Hotspot
+                  \item Paul: Project Owner, Docker, Dokumentation
+                  \item Peter: Projektmanagement, CO2-Grenzwerte und ihre Auswirkungen auf den Menschen
+                  \item Alle: Beurteilung und Verbesserung Software, gegenseitiges Kontrollieren der Einzelergebnisse
+                \end{itemize}
+          \item \textbf{Wie koordinieren wir unsere Arbeit? (Treffpunkte, Austausch)}
+
+                Kommunikation über eine Signal-Gruppe, Online-Meetings via Discord, GitHub zur Versionsverwaltung und als Daten-Backup
+
+          \item \textbf{Wie wird der Arbeitsprozess protokolliert und dokumentiert?}
+
+                Agiles Vorgehensmodell mit GitHub, Dokumentation mittels LaTeX und Markup
+        \end{itemize}
+  \item[Zeitplan] \
+        \begin{itemize}
+          \item \textbf{Wie sieht ein grober Zeitplan aus? (Fixpunkte)}
+
+                Wird mittels Ganttdiagramm gelöst, spätestens bis 06.05.2022
+
+          \item \textbf{Wie kontrollieren wir die Einhaltung des Zeitplans?}
+
+                Benachrichtigungen der Gantt-Diagramm-Anwendung und manuelle Überprüfung der Termine und Einzelfortschritte durch den Projektmanager
+        \end{itemize}
+  \item[Arbeitsort] \
+        \begin{itemize}
+          \item \textbf{Wo findet die Hauptarbeit der Gruppe statt?}
+
+                In der Schule während der vorgesehenen Arbeitszeiten und online, wenn nötig.
+
+          \item \textbf{Benötigt die Gruppe einen speziellen Arbeitsort?}
+
+                Nein, ein einfacher Computerarbeitsplatz reicht für alle Aktivitäten.
+
+          \item \textbf{Platzbedarf?}
+
+                Es ist kein besonderer Platzbedarf nötig.
+        \end{itemize}
+
+        \newpage
+
+  \item[Hilfsmittel/Material] \
+        \begin{itemize}
+          \item \textbf{Welche Hilfsmittel benötigt die Gruppe?}
+
+                Raspberry Pi, CO2-Monitor, Netzstecker, USB-Kabel (A auf Micro)
+
+          \item \textbf{Wo können diese beschafft werden?}
+
+                Sind bereits komplett vorhanden.
+        \end{itemize}
+  \item[Arbeitsstil] \
+        \begin{itemize}
+          \item \textbf{Welche Schwierigkeiten/Probleme können auftreten?}
+
+                Das einzige Problem könnte das Zeitmanagement werden. Das komplette Setup mit CO2-Sensor und Raspberry Pi ist bereits in der Praxis umgesetzt worden und stellt deswegen keine große Herausforderung dar.
+
+          \item \textbf{Wie reagieren wir darauf?}
+
+                Der Projektmanager behält die Abgabetermine im Blick und weist das Team im Vornherein auf knappe Deadlines oder etwaige Risiken hin.
+
+          \item \textbf{Welche Gesprächs- und Entscheidungsregeln sollen in der Gruppe gelten?}
+
+                Demokratisches Abstimmverhalten mit Veto-Recht für Project Owner. Ansonsten wird auf respektvolles und vertrauliches Miteinander gesetzt.
+        \end{itemize}
+\end{description}
+
+
+
+\end{document}
