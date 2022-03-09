@@ -220,7 +220,9 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 \chapter{Hardwaretechnische Umsetzung}
 
-\section{Benötigte Hardware}
+\section{Raspberry Pi}
+
+\section{TFA Dostmann CO$_2$-Monitor AIRCONTROL MINI}
 
 
 
@@ -248,6 +250,10 @@ zu sehen.
 
 
 \section{Einrichten der Software}
+
+\subsection{Python}
+
+\subsection{Docker}
 
 \subsection{Einrichten des Backends}
 
@@ -283,11 +289,16 @@ Nach dem Abspeichern der Datei, kann ein Terminal-Fenster im Ordner des \textit{
 
 \subsection{Einrichten des Frontends}
 
-Um die Daten ansehnlich darstellen zu koennen, kann ein Frontend eingebunden werden. Dazu muss lediglich das Frontend bezogen werden und die docker-compose-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden.
+Um die Daten ansehnlich darstellen zu können, kann ein Frontend eingebunden werden. Dazu muss lediglich das Frontend bezogen werden und die docker-compose-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden.
 
 Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt angepasst werden.
 
 Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose up} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
+
+
+\newpage
+
+\printbibliography
 
 
 \end{document}
