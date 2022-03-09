@@ -1,0 +1,9 @@
+[submodule "CO2MonitorFrontend"]
+	path = CO2MonitorFrontend
+	url = https://github.com/FMinister/CO2MonitorFrontend.git
+[submodule "CO2MonitorAPI"]
+	path = CO2MonitorAPI
+	url = https://github.com/FMinister/CO2MonitorAPI.git
+[submodule "CO2MonitorReader"]
+	path = CO2MonitorReader
+	url = https://github.com/FMinister/CO2MonitorReader.git
