@@ -218,7 +218,7 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO2-Sensors zur Bestimmun
 
 \section{Benötigte Software}
 
-Um die benötigte Software in Betrieb nehmen zu können, wird folgende Software benötigt:
+Um die Programme rund um den CO$_2$-Monitor in Betrieb nehmen zu können, wird folgende Software benötigt:
 
 \begin{itemize}
   \item PiOS mit mitgelieferter Standardsoftware
@@ -233,7 +233,7 @@ Ist die Software installiert und eingerichtet, kann mit der Implementierung der 
 
 % TODO PAP einfuegen?
 
-Um die Daten des CO$_2$-Sensors persistent zu gestalten, die Werte stets im Blick zu behalten und auch längere Zeiträume auswerten zu können, werden die Werte des Sensors mittels eines Readers an ein Backend gesendet und gespeichert und können mittels eines Frontends angezeigt werden. Diese Verknüpfung von Software-Komponenten ist in Abbildung xyz % TODO Bild des PAPs 
+Um die Daten des CO$_2$-Sensors persistent zu gestalten, die Werte stets im Blick zu behalten und auch längere Zeiträume auswerten zu können, werden die Werte des Sensors mittels einer Auslesesoftwarekomponente an ein Backend gesendet und gespeichert. Diese Daten können dann mittels eines Frontends angezeigt werden. Diese Verknüpfung von Software-Komponenten ist in Abbildung xyz % TODO Bild des PAPs 
 zu sehen.
 
 
@@ -241,7 +241,7 @@ zu sehen.
 
 \subsection{Einrichten des Backends}
 
-Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werden können, wird mittels der CO2MonitorAPI realisiert. Hier kann in der docker-compose-Datei der Port bestimmt werden, auf dem das \ac{API} erreichbar ist.
+Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werden können, wird mittels der CO2MonitorAPI realisiert. Hier kann in der docker-compose-Datei der Port bestimmt werden, auf dem die \ac{API} erreichbar ist.
 
 Hinweis: Wird dieser geändert, müssen im \textit{Reader} und im Frontend der Port der \ac{API} ebenfalls angepasst werden.
 
