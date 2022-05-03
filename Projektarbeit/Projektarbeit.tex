@@ -197,9 +197,14 @@
 
 \chapter*{Abkürzungsverzeichnis}
 
-\begin{acronym}[API]
+\begin{acronym}[DGUV]
   \acro{API}{Application Programming Interface}
+  \acro{ASR}{Technische Regeln für Arbeitsstätten}
+  \acro{DGUV}{Deutsche Gesetzliche Unfallversicherung}
+  \acro{UBA}{Umweltbundesamt}  
+  \acro{ZNS}{Zentralnervensystem}  
 \end{acronym}
+
 
 \newpage
 
@@ -213,15 +218,36 @@ Diese Arbeit soll einen Überblick darüber geben, welche medizinischen Risiken 
 Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestimmung der Luftqualität in Arbeitsräumen erstellt werden. Dabei soll über die Anforderungen an die Hardware, die benötigten Komponenten, die Einbindung in das Netzwerk und die Umsetzung der dazugehörigen Software eingegangen werden. Die Arbeit richtet sich dabei hauptsächlich an technisch versierte Leser, welche bereits grundlegende Kenntnisse in den Bereichen Hard- und Software besitzen.
 
 
-
 \chapter{CO$_2$-Grenzwerte und deren Auswirkungen auf den Menschen}
+
+Um sich der Wichtigkeit einer Messung des CO$_2$-Gehaltes in der Atemluft bewusst zu werden, werden in diesem Kapitel die von verschiedenen Institutionen festgelegten CO$_2$-Grenzwerte zusammengefasst.
+
+Weiterhin werden die verschiedenen physiologischen Risiken, die durch einen zu hohen CO$_2$-Gehalt in der Raumluft drohen, vorgestellt.
 
 
 \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
 
+Die \ac{DGUV} veröffentlicht \ac{ASR}, zu diesen gehört auch die \ac{ASR} A3.6 "Lüftung" \autocite*{ASR}, welche sich in Kapitel 4 mit Regelungen zur Luftqualität von Arbeitsplätzen auseinandersetzt. 
+
+Wie in Anlage x zu sehen, wird eine generelle CO$_2$-Konzentration von unter 1000 ppm als ungefährlich eingestuft und fordert keine weiteren Maßnahmen. Bei einer CO$_2$-Konzentration von 1000 bis 2000 ppm wird die Luftqualität als hygienisch auffällig beschrieben, 
+dabei werden bereits Maßnahmen wie bessere Lüftungsmaßnahmen und eine Überprüfung des aktuellen Lüftungsverhalten empfohlen. Ab einer generellen CO$_2$-Konzentration von über 2000 ppm stuft die \ac{DGUV} die Atemluft als hygienisch inakzeptabel ein, hierbei werden
+Gegenmaßnahmen wie eine verstärkte Lüftung, bis zur Reduktion der Personenzahl im Raum empfohlen. 
+
+Diese Messungen sollen laut der \ac{ASR} A3.6 \autocite*{ASR} in einer Höhe von 1,50 m und einem Abstand von 1 bis 2 m von Wänden erfolgen, mit einer ausreichend großen Distanz zu Personen, damit diese die Messungen nicht direkt durch ihre Atemluft beeinflussen.
+
+Die vom \ac{UBA} veröffentlichte "Gesundheitliche Bewertung von Kohlendioxid in der Innenraumluft" \autocite*{umweltbundesamt} zitiert aus der DIN EN 13779 „Lüftung von Nichtwohngebäuden – Allgemeine Grundlagen und Anforderungen an Lüftungs- und Klimaanlagen und Raumkühlsysteme“ \autocite*{din_en_13779}, welche die CO$_2$-Grenzwerte strikter und feingranularer als die \ac{DGUV} beurteilt. Bei Werten unter 800 ppm wird dabei von einer hohen Raumluftqualität gesprochen, von 800 bis 1000 ppm gilt die Raumluftqualität als "mittlere Raumluftqualität". CO$_2$-Konzentrationen von 1000 bis 1400 ppm werden als "Mäßige Raumluftqualität" eingestuft und Werte über 1400 ppm gelten als "Niedrige Raumluftqualität".
+
+Aus den beiden Bewertungen der CO$_2$-Konzentration für die Raumluft kann man darauf schließen, dass die CO$_2$-Konzentration generell nicht über 1000 ppm erreichen sollte, damit die Raumluft weiterhin eine ausreichend hohe Qualität hat. 
 
 \section{Physiologische Auswirkungen eines zu hohen CO$_2$-Gehaltes in der Atemluft}
 
+Eine von Kajtár et al. \autocite*{kajtar} durchgeführte Studie hat gezeigt, dass eine höhere CO$_2$-Konzentration zu einer schnelleren Erschöpfung beim Lösen von Aufgaben führt. Dafür sollten 10 Probanden unter verschiedenen CO$_2$-Konzentrationen über einen Zeitraum von jeweils 2 x 70 Minuten einen Text auf Fehler korrigieren. Dabei wurde festgestellt, dass sich die mentale Leistungsfähigkeit im Gegensatz zu einer akzeptablen CO$_2$-Konzentration von 600 ppm verringert. Die Messung von physiologischen Parametern der Probanden zeigte außerdem, dass das Lösen von Denkaufgaben dadurch ebenfalls anstrengender wird. Bei einem Aufenthalt von zwei bis drei Stunden in einem geschlossenen Raum führte eine CO$_2$-Konzentration von 3000 ppm zu einer verringerten Konzentrationsfähigkeit.
+
+Zhang et al. \autocite*{zhang} kamen in einer Studie mit 15 Probanden zu der Erkenntnis, dass eine erhöhte CO$_2$-Konzentration in der Atemluft zu einer stark verringerten Leistungsfähigkeit beim Lösen von Denkaufgaben führt. Dafür wurden die Probanden verschiedenen CO$_2$-Konzentrationen (1500, 3500 und 5000 ppm) ausgesetzt, während sie verschiedene Aufgaben lösen mussten. Der Abfall der Leistungsfähigkeit wurde dabei bei erst der Veränderung der CO$_2$-Konzentration von 1500 ppm auf 3500 ppm festgestellt. Bei einem weiteren Anstieg des Wertes auf 5000 ppm wurden keine weiteren Veränderung der mentalen Leistungsfähigkeit festgestellt. 
+
+Bei einer Studie, die von Myhrvold et al \autocite*{myhrvold} mit 548 Schülern durchgeführt wurde, wurden die Auswirkungen auf den Körper, speziell auf das \ac{ZNS}, die Haut und Schleimhaut untersucht. Während bei dieser Studie die Auswirkungen auf die mentale Leistungsfähigkeit nicht signifikant auffällig waren, wirkte sich eine CO$_2$-Konzentration von über 1500 ppm negativ auf das körperliche Wohlbefinden aus. Dabei wurden unter anderem Symptome wie Kopfschmerzen, Müdigkeit, Konzentrationsschwäche und Hustenanfälle festgestellt.
+
+Ein ähnliches Ergebnis erzielt auch eine von Tiesler et al. \cite*{tiesler} durchgeführte Studie. Dafür wurde der CO$_2$-Gehalt der Atemluft in den Klassenräumen von 16 Klassen aus drei verschiedenen Bremer Schulen und seine Wirkung auf die Schüler untersucht. Dabei wurde festgestellt, dass sich regelmäßiges Lüften, um die CO$_2$-Konzentration zu senken, positiv auf das Wohlbefinden der Probanden auswirkt. Der zu erreichende Zielwert durch das erhöhte Lüftungsintervall lag dabei unter 1000 bzw. 1500 ppm, die vorher  erreichten Werte nach einer Doppelstunde erreichten bis zu 4000 ppm. Die Schüler berichteten in Befragungen von einer verbesserten Aufmerksamkeit, welche sich wahrscheinlich auf die geringere CO$_2$-Konzentration in der Raumluft zurückführen lässt.
 
 
 \chapter{Hardwaretechnische Umsetzung}
