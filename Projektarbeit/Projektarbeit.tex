@@ -64,6 +64,22 @@
                stores and manipulates data, and provides
                output in a useful format}
 }
+\newglossaryentry{Python}
+{
+  name=Python,
+  description={ist eine plattformunabhängige, multiparadigmatische, stark und dynamisch typisierte Programmiersprache.
+               Die Programmiersprache zeichnet sich besonders durch ihre Trivialität und vielseitige Einsetzbarkeit aus.
+               Python ist eine der meist verbreiteten Programmiersprachen weltweit.
+               Die Weiterentwicklung der Programmiersprache wird durch die Python Software Foundation und den ursprünglichen Entwickler Guido van Rossum durchgeführt}
+}
+\newglossaryentry{Docker}
+{
+  name=Docker,
+  description={ist eine freie Softwareplattform der Docker, Inc. Das Ziel von Docker ist es, das Erstellen, Testen und Bereitstellen von Software im wesentlich zu beschleunigen.
+              Mit Docker können Softwarepakete, sogenannte Container, erstellt werden. Diese gewährleisten eine Trennung und Verwaltung der lokalen Computerressourcen.
+              Die am 13.03.2013 erstmals veröffentlichte Software ist unter anderem für die Betriebssysteme Linux, Microsoft Windows und macOS verfügbar}
+}
+
 
 %%% Für Textübergreifende Numerierung %%%
 \usepackage{enumitem}
@@ -239,15 +255,12 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 \section{Benötigte Software}
 
-%%% Test Glossary
-\gls{computer}
-\cite*{python}
-
 Um die Programme rund um den CO$_2$-Monitor in Betrieb nehmen zu können, wird folgende Software benötigt:
 
 \begin{itemize}
   \item PiOS mit mitgelieferter Standardsoftware
-  \item Docker
+  \item \gls{Docker} \cite*{docker_overview, docker_install, docker_setup}
+  \item \gls{Python} \cite*{python, python_license}
   \item docker-compose
 \end{itemize}
 
