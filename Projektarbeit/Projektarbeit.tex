@@ -229,10 +229,29 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 \section{Technische Anforderungen an die benötigte Hardware}
 
+Um einen CO$_2$-Monitor betreiben zu k\"onnen werden ein Computer und ein CO$_2$-Sensor benötigt. Die Mindestanforderungen an den Computer sind 512MB Arbeitsspeicher,
+einen ARM Cortex-A53 Quad-Core CPU 1GHz 64-bit Prozessor und USB Type A Anschl\"usse. Diese Werte sind die Mindestanforderungen von einem minimalen Linuxsystem, da ein lauff\"ahiges
+Linuxsystem ben\"otigt wird um die Softwareanforderungen zu erf\"ullen. 
+
+Der CO$_2$-Sensor sollte ein Messbereich von 0ppm bis einschließlich 2000ppm vorweisen. Dies hat den Grund die komplette Reichweite der Luftverschmutzung aufzuzeichnen, 
+von der klaren Luft bis hin zu einer inakzeptablen Luftqualität ab 2000ppm.
 
 \section{Überblick über die verwendete Hardware}
 
+Das die Programme rund um den CO$_2$-Monitor benutzt werden k\"onnen, wird folgende Hardware benötigt:   
 
+\begin{itemize}
+  \item Raspberry Pi 3 Model B+
+  \item TFA-Dostmann CO$_2$-Monitor AIRCO2NTROL MINI 31.5006
+\end{itemize}
+
+Der Raspberry Pi ist ein Minicomputer auf einer nur Scheckkarten-großen Platine, der sich vielfältig erweitern lässt. 
+Er wurde ursprünglich zu Lern- und Demonstrationszwecken entwickelt, eignet sich aber auch für die 
+Realisierung verschiedener privater oder professioneller Anwendungen.
+
+Mit dem CO$_2$-Monitor AIRCO2NTROL MINI 31.5006 können Sie kontrollieren, wie verbraucht und verunreinigt die Luft in Räumen ist, 
+in denen sich Personen aufhalten, z.B. Schulen, Büros, öffentliche Einrichtungen. Durch rechtzeitiges und energieeffizientes Lüften sorgen Sie für ein gesundes Raumklima.  
+Der Monitor zeigt auf einem Display den CO2 Gehalt der Raumluft im Wechsel mit der Temperatur an. Eine farbige Ampelanzeige neben dem Display wechselt je nach Luftqualität von Grün über Gelb zu Rot.
 
 \chapter{Softwaretechnische Umsetzung}
 
@@ -281,7 +300,7 @@ getestet werden.
 
 Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Dazu muss die docker-compose-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, muss dieser vorher bestimmt werden, was mit folgendem Befehl in einem Terminal-Fenster funktioniert:
 
-% TODO Hier Bash-Befehlt fuer lsusb hinschreiben
+% TODO Hier Bash-Befehl fuer lsusb hinschreiben
 
 Ist der USB-Port bestimmt, kann der vordere Teil der devices, also "\texttt{/dev/hidraw0}"  mit dem ausgelesenen Port ersetzt werden.
 
