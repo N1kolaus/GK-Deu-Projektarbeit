@@ -47,9 +47,23 @@
     pdfstartview=FitV,
     }
 \setlength{\parindent}{0em}
+
+%%% Fuer Glossar
+\usepackage{glossaries}
+
 \usepackage{bookmark}% Weil das hyperref deutlich verbesser.
 \usepackage{cleveref}
 \crefname{paragraph}{Abschnitt}{Abschnitt}
+
+\makeglossaries
+
+\newglossaryentry{computer}
+{
+  name=computer,
+  description={is a programmable machine that receives input,
+               stores and manipulates data, and provides
+               output in a useful format}
+}
 
 %%% Für Textübergreifende Numerierung %%%
 \usepackage{enumitem}
@@ -170,7 +184,7 @@
 
 \title{Die hard- und softwaretechnische Implementierung eines CO$_2$-Sensors zur Messung der Raumluftqualität}
 \author{Julius Caesar, Péter Egermann, Paul Görtler, Johannes Leyrer}
-\date{14.01.2022}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -192,11 +206,7 @@
 
 \chapter{Motivation}
 
-\section{Warum interessiert uns die Fragestellung?}
-
 Im Laufe der Corona-Pandemie und der damit verbundenen Ausgangsbeschränkungen musste man sich zunehmen in Innenräumen aufhalten, um der Verbreitung des Virus entgegenzuwirken. Aus diesem Grund musste man sich zwangsweise mit der Luftqualität im Homeoffice und besonders in Büroräumen auseinandersetzen, um das Gesundheitsrisiko zu minimieren und konzentriert arbeiten zu können. Da die Luftqualität durch Menschen meist nur subjektiv wahrgenommen werden kann, benötigt man dafür eine Messstelle. Da die gesundheitlichen Auswirkungen von schlechter Raumluftqualität ausreichend erforscht sind, existieren genügend konkrete Werte zur Orientierung.
-
-\section{Welche Ziele wollen wir erreichen?}
 
 Diese Arbeit soll einen Überblick darüber geben, welche medizinischen Risiken durch eine unzureichende Luftqualität entstehen können und welche positiven Auswirkungen eine ausreichende Versorgung mit Frischluft haben kann.
 
@@ -206,29 +216,32 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 \chapter{CO$_2$-Grenzwerte und deren Auswirkungen auf den Menschen}
 
+
 \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
 
+
 \section{Physiologische Auswirkungen eines zu hohen CO$_2$-Gehaltes in der Atemluft}
-
-\section{Verwendung eines CO$_2$-Sensors in einem Heimnetzwerk zur Bestimmung der Raumluftqualität}
-
-\section{Methoden zur Bestimmung des CO$_2$-Gehaltes in der Raumluft}
-\subsection{Sensor 1}
-\subsection{Sensor 2}
 
 
 
 \chapter{Hardwaretechnische Umsetzung}
 
-\section{Raspberry Pi}
 
-\section{TFA Dostmann CO$_2$-Monitor AIRCONTROL MINI}
+\section{Technische Anforderungen an die benötigte Hardware}
+
+
+\section{Überblick über die verwendete Hardware}
 
 
 
 \chapter{Softwaretechnische Umsetzung}
 
+
 \section{Benötigte Software}
+
+%%% Test Glossary
+\gls{computer}
+\cite*{python}
 
 Um die Programme rund um den CO$_2$-Monitor in Betrieb nehmen zu können, wird folgende Software benötigt:
 
@@ -250,10 +263,6 @@ zu sehen.
 
 
 \section{Einrichten der Software}
-
-\subsection{Python}
-
-\subsection{Docker}
 
 \subsection{Einrichten des Backends}
 
@@ -295,10 +304,38 @@ Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls
 
 Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose up} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
 
+\newpage
+
+%%% Abbildungsverzeichnis
+\listoffigures
+%%% Tabellenverzeichnis
+\listoftables
+%%% Codeverzeichnis
+\lstlistoflistings
+%%% Glossar
+\printglossaries
+%%% Literaturverzeichnis
+\printbibliography
 
 \newpage
 
-\printbibliography
+\appendix
+\ihead{Anhang}
+
+
+
+\chapter{this, that, etc.}
+
+% \begin{figure}[h!]
+%   \centering
+%   \includegraphics[angle=90,origin=c,width=0.75\textwidth]{data/Gantt.png}
+%   \caption{Gantt-Diagramm}
+%   \label{fig:Gantt}
+% \end{figure}
+
+
+
+\chapter{Something something}
 
 
 \end{document}
