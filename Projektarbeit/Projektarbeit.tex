@@ -341,7 +341,7 @@ Ist die Software installiert und eingerichtet, kann mit der Implementierung der 
 
 \section{Zusammenspiel der Softwarekomponenten}
 
-Um die Daten des CO$_2$-Sensors persistent zu gestalten, die Werte stets im Blick zu behalten und auch längere Zeiträume auswerten zu können, werden CO$_2$- und Temperaturwerte mittels einer Auslesesoftwarekomponente an ein \gls{backend} gesendet und gespeichert. Diese Daten können dann mittels eines \gls{frontend}s angezeigt werden. Diese Verknüpfung von Software-Komponenten ist in \vref{fig:Verbundplan} zu sehen.
+Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte stets im Blick behalten werden können und auch längere Zeiträume ausgewerten werden können. Dafür werden die CO$_2$- und Temperaturwerte mittels einer Software-Komponente zum Auslesen der Daten an ein \gls{backend} gesendet und gespeichert. Diese Daten können dann mittels eines \gls{frontend}s angezeigt werden. Diese Verknüpfung der Software-Komponenten ist in \vref{fig:Verbundplan} zu sehen.
 
 \begin{figure}[htbp]
   \centering
@@ -355,9 +355,9 @@ Um die Daten des CO$_2$-Sensors persistent zu gestalten, die Werte stets im Blic
 
 \subsection{Einrichten des Backends}
 
-Die zentrale Stelle, an der Daten eingehen und gespeichert sowie abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Hier kann in der \texttt{docker-compose.yml}-Datei der Port bestimmt werden, auf dem die \ac{API} erreichbar ist. Dieser freigegebene Port ermöglicht dem Frontend und dem CO2Reader Zugang zur Backend-Logik um Daten abzuspeichern und abzurufen.
+Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Hier kann in der \texttt{docker-compose.yml}-Datei der Port bestimmt werden, auf dem die \ac{API} erreichbar ist. Dieser freigegebene Port ermöglicht dem Frontend und dem CO2Reader Zugang zur Backend-Logik um Daten abzuspeichern und abzurufen.
 
-Mit dem Öffnen eines Terminal-Fensters im Ordner der \ac{API} und mittels Eingabe des Befehls \texttt{docker-compose -f docker-compose.yml up -d} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels \texttt{IpAdresseDesPis:8008/api/test} getestet werden.
+Durch das Öffnen eines Terminal-Fensters im Ordner der \ac{API} und der Eingabe des Befehls \texttt{docker-compose -f docker-compose.yml up -d} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels \texttt{IpAdresseDesPis:8008/api/test} getestet werden.
 
 
 \subsection{Einrichten der Lese-Software}
@@ -382,7 +382,7 @@ Ist der USB-Port bestimmt, kann der vordere Teil der devices, also \enquote{\tex
 
 % TODO IP-Adresse anpassen? Wenn nicht, Name ueberpruefen.
 
-Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier Ort, in dem sich der Sensor befindet, eingetragen werden.
+Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier der Ort, an dem sich der Sensor befindet, eingetragen werden.
 
 Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose -f docker-compose.yml up -d} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
 
