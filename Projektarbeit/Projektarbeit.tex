@@ -57,6 +57,7 @@
 \crefname{lstlisting}{Listing}{Listings}
 
 \makeglossaries
+% \renewcommand*{\glossarysection}[1][]{\chapter{#1}}
 
 %%% Für Textübergreifende Numerierung %%%
 \usepackage{enumitem}
@@ -444,7 +445,9 @@ wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund un
 %%% Codeverzeichnis
 \lstlistoflistings
 %%% Glossar
-\printglossaries
+\addchap{Glossar}
+\printglossary
+% \printglossaries
 %%% Literaturverzeichnis
 \printbibliography
 
