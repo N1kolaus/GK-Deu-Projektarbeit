@@ -345,7 +345,7 @@ Um die Daten des CO$_2$-Sensors persistent zu gestalten, die Werte stets im Blic
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\textwidth]{pictures/SoftwareZusammenspiel.drawio.png}
+  \includegraphics[width=0.9\textwidth]{pictures/SoftwareZusammenspiel.png}
   \caption{Verbundplan der Komponenten}
   \label{fig:Verbundplan}
 \end{figure}
@@ -364,7 +364,7 @@ Mit dem Öffnen eines Terminal-Fensters im Ordner der \ac{API} und mittels Einga
 
 Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem Befehl \texttt{ls -la /dev/hidraw*y} angezeigt und die Device-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden.
 
-Ist der USB-Port bestimmt, kann der vordere Teil der devices, also \glqq{}\texttt{/dev/hidraw0}\grqq{} mit dem ausgelesenen Port ersetzt werden, zu sehen in \vref{code:compose:hidraw}.
+Ist der USB-Port bestimmt, kann der vordere Teil der devices, also \enquote{\texttt{/dev/hidraw0}} mit dem ausgelesenen Port ersetzt werden, zu sehen in \vref{code:compose:hidraw}.
 
 % \begin{lstlisting}[language=docker,caption={Anpassen des USB-Ports},breaklines=true,label={docker:hidraw}]
 %   \dots
@@ -382,9 +382,9 @@ Ist der USB-Port bestimmt, kann der vordere Teil der devices, also \glqq{}\textt
 
 % TODO IP-Adresse anpassen? Wenn nicht, Name ueberpruefen.
 
-Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier Ort, in dem sich der Sensor befindet eingetragen werden.
+Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier Ort, in dem sich der Sensor befindet, eingetragen werden.
 
-Nach dem Abspeichern der Datei, kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose up} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
+Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose -f docker-compose.yml up -d} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
 
 
 \subsection{Einrichten des Frontends}
@@ -393,7 +393,7 @@ Um die Daten ansehnlich darstellen zu können, kann ein Frontend eingebunden wer
 
 Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt angepasst werden.
 
-Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose up} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
+Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose -f docker-compose.yml up -d} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
 
 \newpage
 
