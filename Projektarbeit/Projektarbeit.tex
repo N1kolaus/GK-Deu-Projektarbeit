@@ -355,7 +355,13 @@ Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden kö
 
 Nachdem die Anwendung von GitHub bezogen wurde, müssen noch Konfigurationswerte angepasst werden. Beispielsweise muss der Port festgelegt werden, auf dem die \ac{API} erreichbar sein soll. Hierfür kann in der \texttt{docker-compose.yml}-Datei besagter Port angegeben werden, welcher dem Frontend und dem CO2Reader Zugang zur Backend-Logik erlaubt, um Daten abzuspeichern und abzurufen.
 
-Durch das Öffnen eines Terminal-Fensters im Ordner der \ac{API} und der Eingabe des Befehls \texttt{docker-compose -f docker-compose.yml up -d} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels \texttt{IpAdresseDesPis:angegebenerPort/api/test} getestet werden.
+Durch das Öffnen eines Terminal-Fensters im Ordner der \ac{API} und der Eingabe des Befehls
+
+\begin{lstlisting}[language=Bash]
+  docker-compose -f docker-compose.yml up -d
+\end{lstlisting}
+
+wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels \texttt{IpAdresseDesPis:angegebenerPort/api/test} getestet werden.
 
 
 \subsection{Aufbau und Einrichten der Lese-Software}
@@ -388,18 +394,46 @@ Ist der USB-Port bestimmt, kann der Teil vor dem Doppelpunkt der \texttt{devices
 
 Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die \texttt{co2Reader.ini}-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier der Ort, an dem sich der Sensor befindet, eingetragen werden.
 
-Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose -f docker-compose.yml up -d} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
+Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels
+
+\begin{lstlisting}[language=Bash]
+  docker-compose -f docker-compose.yml up -d
+\end{lstlisting}
+
+die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
 
 
 \subsection{Aufbau und Einrichten des Frontends}
 
-Um die Daten ansehnlich darstellen zu können, kann ein Frontend eingebunden werden. Das hier verwendete Frontend ist mit React \autocite{reactjs} und ChartsJs \autocite{chart.js} umgesetzt worden.
+Um die Daten ansehnlich darstellen zu können, kann ein Frontend eingebunden werden. Das hier verwendete Frontend ist mit React \autocite{reactjs} und ChartsJs \autocite{chart.js} umgesetzt worden. Ein Beispiel der Datenvisualisierung ist in \vref{fig:frontend} zu sehen.
 
-Nachdem das Frontend bezogen wurde muss die \texttt{docker-compose.yml}-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{pictures/Frontend.png}
+  \caption{Datenvisualisierung mittels Frontend}
+  \label{fig:frontend}
+\end{figure}
 
-Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt entsprechend verändert werden.
+Nachdem das Frontend bezogen wurde muss die \texttt{docker-compose.yml}-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden, zu sehen in \vref{lst:compose:react_ip}.
 
-Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose -f docker-compose.yml up -d} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
+Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt verändert werden, ebenfalls zu sehen in \vref{lst:compose:react_ip}. Hier muss der Port vor dem Doppelpunkt auf den gewünschten Port gesetzt werden.
+
+\begin{lstlisting}[language=docker-compose-2,caption={Anpassen der \ac{API}-IP und des Ports in der docker-compose.yml},breaklines=true,label={lst:compose:react_ip}]
+  ...
+  environment:
+    REACT_APP_API_URL: http://192.168.178.33:8008/api/
+  ports:
+    - 3000:3000
+  ...
+\end{lstlisting}
+
+Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels
+
+\begin{lstlisting}[language=Bash]
+  docker-compose -f docker-compose.yml up -d
+\end{lstlisting}
+
+wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
 
 \newpage
 
