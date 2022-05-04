@@ -214,7 +214,7 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 
 
-\chapter{CO$_2$-Grenzwerte und deren Auswirkungen auf den Menschen}
+\chapter{CO$_2$-Grenzwerte und deren Auswirkungen auf den Menschen}\label{chapter:2}
 
 
 \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
@@ -229,8 +229,26 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 \section{Technische Anforderungen an die benötigte Hardware}
 
+Um einen CO$_2$-Monitor betreiben zu können werden ein Computer und ein CO$_2$-Sensor benötigt. Die Mindestanforderungen an den Computer sind 512MB Arbeitsspeicher, einen ARM Cortex-A53 Quad-Core 1GHz 64-bit Prozessor und mindestens einem USB Type A Anschluss. Diese Werte sind die Mindestanforderungen von einem minimalen Linux Betriebssystem, welches benötigt wird um die Softwareanforderungen zu erfüllen.
+
+Der CO$_2$-Sensor sollte ein Messbereich von \SI{0}{ppm} bis einschließlich \SI{2000}{ppm} vorweisen. Mit dieser Spannweite können die in \vref{chapter:2} vorgestellten Werte für die Aussage über Luftqualität gemessen und aufgezeichnet werden.
+
 
 \section{Überblick über die verwendete Hardware}
+
+Für die Verwendung der Programme rund um den CO$_2$-Monitor wird folgende Hardware benötigt:
+
+\begin{itemize}
+  \item Raspberry Pi 3 Model B+
+  \item TFA-Dostmann CO$_2$-Monitor AIRCO2NTROL MINI
+\end{itemize}
+
+Der Raspberry Pi ist ein Minicomputer auf einer nur Scheckkarten-großen Platine, der sich vielfältig erweitern lässt.
+Er wurde ursprünglich zu Lern- und Demonstrationszwecken entwickelt, eignet sich aber auch für die
+Realisierung verschiedener privater oder professioneller Anwendungen.
+
+Mit dem CO$_2$-Monitor AIRCO2NTROL MINI kann die Luft in Räumen,
+in denen sich Personen aufhalten, z.B. Schulen, Büros, öffentliche Einrichtungen, kontrolliert werden. Der Monitor zeigt auf einem Display den CO$_2$-Gehalt der Raumluft im Wechsel mit der Temperatur an. Eine farbige Ampelanzeige neben dem Display wechselt je nach Luftqualität von Grün über Gelb zu Rot.
 
 
 
@@ -281,7 +299,7 @@ getestet werden.
 
 Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Dazu muss die docker-compose-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, muss dieser vorher bestimmt werden, was mit folgendem Befehl in einem Terminal-Fenster funktioniert:
 
-% TODO Hier Bash-Befehlt fuer lsusb hinschreiben
+% TODO Hier Bash-Befehl fuer lsusb hinschreiben
 
 Ist der USB-Port bestimmt, kann der vordere Teil der devices, also "\texttt{/dev/hidraw0}"  mit dem ausgelesenen Port ersetzt werden.
 
