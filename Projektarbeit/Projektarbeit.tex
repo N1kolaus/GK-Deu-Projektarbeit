@@ -324,10 +324,6 @@ Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestim
 
 \section{Benötigte Software}
 
-%%% Test Glossary
-% \gls{computer}
-% \cite*{python}
-
 Um die Programme rund um den CO$_2$-Monitor in Betrieb nehmen zu können, wird folgende Software benötigt:
 
 \begin{itemize}
@@ -336,12 +332,12 @@ Um die Programme rund um den CO$_2$-Monitor in Betrieb nehmen zu können, wird f
   \item docker-compose
 \end{itemize}
 
-Ist die Software installiert und eingerichtet, kann mit der Implementierung der Auslese- und Verarbeitungssoftware begonnen werden.
+Ist die benötigte Software installiert und eingerichtet, kann mit der Implementierung der Auslese- und Verarbeitungssoftware begonnen werden. Alle in den folgenden Kapiteln genannten Softwarekomponenten sind auf GitHub zu finden.
 
 
 \section{Zusammenspiel der Softwarekomponenten}
 
-Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte stets im Blick behalten werden können und auch längere Zeiträume ausgewerten werden können. Dafür werden die CO$_2$- und Temperaturwerte mittels einer Software-Komponente zum Auslesen der Daten an ein \gls{backend} gesendet und gespeichert. Diese Daten können dann mittels eines \gls{frontend}s angezeigt werden. Diese Verknüpfung der Software-Komponenten ist in \vref{fig:Verbundplan} zu sehen.
+Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte abrufbar sind und auch über längere Zeiträume ausgewertet werden können. Dafür werden die CO$_2$- und Temperaturwerte mittels einer Software-Komponente zum Auslesen der Daten an ein \gls{backend} gesendet und gespeichert. Diese Daten können dann mittels eines \gls{frontend}s angezeigt werden. Diese Verknüpfung der Software-Komponenten ist in \vref{fig:Verbundplan} zu sehen.
 
 \begin{figure}[htbp]
   \centering
@@ -351,47 +347,57 @@ Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte stet
 \end{figure}
 
 
-\section{Einrichten der Software}
+\section{Aufbau und Einrichten der Software}
 
-\subsection{Einrichten des Backends}
+\subsection{Aufbau und Einrichten des \gls{backend}s}
 
-Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Hier kann in der \texttt{docker-compose.yml}-Datei der Port bestimmt werden, auf dem die \ac{API} erreichbar ist. Dieser freigegebene Port ermöglicht dem Frontend und dem CO2Reader Zugang zur Backend-Logik um Daten abzuspeichern und abzurufen.
+Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Diese ist in Python geschrieben und verwendet FastAPI als Grundlage für das Bereitstellen einer API. Um das Bereitstellen der Anwendung und deren  Isolierung vom Betriebssystem zu erleichtern, wird Docker als Containervirtualisierungssoftware eingesetzt.
 
-Durch das Öffnen eines Terminal-Fensters im Ordner der \ac{API} und der Eingabe des Befehls \texttt{docker-compose -f docker-compose.yml up -d} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels \texttt{IpAdresseDesPis:8008/api/test} getestet werden.
+Nachdem die Anwendung von GitHub bezogen wurde, müssen noch Konfigurationswerte angepasst werden. Beispielsweise muss der Port festgelegt werden, auf dem die \ac{API} erreichbar sein soll. Hierfür kann in der \texttt{docker-compose.yml}-Datei besagter Port angegeben werden, welcher dem Frontend und dem CO2Reader Zugang zur Backend-Logik erlaubt, um Daten abzuspeichern und abzurufen.
+
+Durch das Öffnen eines Terminal-Fensters im Ordner der \ac{API} und der Eingabe des Befehls \texttt{docker-compose -f docker-compose.yml up -d} wird die Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und wartet auf Speicher- oder Abrufbefehle. Ob die Applikation richtig funktioniert kann mittels \texttt{IpAdresseDesPis:angegebenerPort/api/test} getestet werden.
 
 
-\subsection{Einrichten der Lese-Software}
+\subsection{Aufbau und Einrichten der Lese-Software}
 
-Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem Befehl \texttt{ls -la /dev/hidraw*y} angezeigt und die Device-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden.
+Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Diese Lesesoftware ist in Python geschrieben und nutzt die CO2Meter-Bibliothek von Vladimir Filimonov.
+\autocite{github_co2meter}
 
-Ist der USB-Port bestimmt, kann der vordere Teil der devices, also \enquote{\texttt{/dev/hidraw0}} mit dem ausgelesenen Port ersetzt werden, zu sehen in \vref{code:compose:hidraw}.
+Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem in \cref{lst:bash:hidraw} zu sehenden Bash-Script angezeigt und die hidraw-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden. \autocite{get_usb_hidraw}
 
-% \begin{lstlisting}[language=docker,caption={Anpassen des USB-Ports},breaklines=true,label={docker:hidraw}]
-%   \dots
-%   devices:
-%             - /dev/hidraw0:/dev/hidraw16
-%   \dots
-% \end{lstlisting}
+\begin{lstlisting}[language=docker-compose-2,caption={Bash-Script zum Erkennen der hidraw-Id},breaklines=true,label={lst:bash:hidraw}]
+  #!/bin/bash
 
-\begin{lstlisting}[language=docker-compose-2,caption={Anpassen des USB-Ports in der docker-compose.yml},breaklines=true,label={code:compose:hidraw}]
+  FILES=/dev/hidraw*
+  for f in $FILES
+  do
+    FILE=${f##*/}
+    DEVICE="$(cat /sys/class/hidraw/${FILE}/device/uevent | grep HID_NAME | cut -d '=' -f2)"
+    printf "%s \t %s\n" $FILE "$DEVICE"
+  done
+\end{lstlisting}
+
+Ist der USB-Port bestimmt, kann der Teil vor dem Doppelpunkt der \texttt{devices}, in diesem Fall \enquote{\texttt{/dev/hidraw0}}, mit dem ausgelesenen Port ersetzt werden, zu sehen in \vref{lst:compose:hidraw}.
+
+\begin{lstlisting}[language=docker-compose-2,caption={Anpassen des USB-Ports in der docker-compose.yml},breaklines=true,label={lst:compose:hidraw}]
   ...
     devices:
       - /dev/hidraw0:/dev/hidraw16
   ...
 \end{lstlisting}
 
-% TODO IP-Adresse anpassen? Wenn nicht, Name ueberpruefen.
-
-Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die co2Reader.ini-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier der Ort, an dem sich der Sensor befindet, eingetragen werden.
+Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die \texttt{co2Reader.ini}-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier der Ort, an dem sich der Sensor befindet, eingetragen werden.
 
 Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels \texttt{docker-compose -f docker-compose.yml up -d} die Anwendung gestartet werden. Der Docker-Container läuft ab jetzt im Hintergrund, liest die Daten des Sensors aus und schickt diese an die angegebene IP-Adresse der \ac{API}.
 
 
-\subsection{Einrichten des Frontends}
+\subsection{Aufbau und Einrichten des Frontends}
 
-Um die Daten ansehnlich darstellen zu können, kann ein Frontend eingebunden werden. Dazu muss lediglich das Frontend bezogen werden und die docker-compose-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden.
+Um die Daten ansehnlich darstellen zu können, kann ein Frontend eingebunden werden. Das hier verwendete Frontend ist mit React \autocite{reactjs} und ChartsJs \autocite{chart.js} umgesetzt worden.
 
-Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt angepasst werden.
+Nachdem das Frontend bezogen wurde muss die \texttt{docker-compose.yml}-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden.
+
+Der ausgehende Port, von dem das Frontend am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt entsprechend verändert werden.
 
 Mit dem Öffnen eines Terminal-Fensters im Ordner des Frontends und mittels \texttt{docker-compose -f docker-compose.yml up -d} wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der docker-compose angegebenen Port aufgerufen werden.
 
