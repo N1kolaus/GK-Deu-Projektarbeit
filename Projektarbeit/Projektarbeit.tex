@@ -1,5 +1,5 @@
 \documentclass[a4paper,
-    11pt,
+    12pt,
     headings=small,
     ngerman,
     listof=totoc,
@@ -512,6 +512,13 @@ Mit dem Öffnen eines Terminal-Fensters im Ordner des \gls{frontend}s und mittel
 
 wird Anwendung gestartet. Der \gls{Docker}-Container läuft ab jetzt im Hintergrund und kann mittels der IP-Adresse des ausführenden Gerätes sowie dem in der \texttt{docker-compose.yml}-Datei angegebenen Port aufgerufen werden.
 
+
+
+\chapter{Zusammenfassung}
+Eine zu hohe CO$_2$-Konzentration in der Raumluft mindert die Konzentrationsfähigkeit, die Produktivität und das körperliche Wohlbefinden der in diesen Räumen arbeitenden Menschen. Die von der \ac{DGUV} \ac{ASR} A3.6 \autocite{ASR} und der DIN EN 16798-1 \autocite{din_en_16798} festgelegten Grenzwerte für den CO$_2$-Gehalt der Raumluft decken sich in etwa mit den durch verschiedene Studien belegten Grenzwerten und bilden damit eine aussagekräftige Grundlage für die Einschätzung der Raumluftqualität. Die Einrichtung eines CO$_2$-Monitors mittels Raspberry-Pi und eines CO$_2$-Sensors ist eine relativ kostengünstige und mit etwas Vorwissen auch einfach zu implementierende Möglichkeit, den CO$_2$-Gehalt der Raumluft zu bestimmen. Diese Messungen sollte vor allem in Büros und Klassenräumen stattfinden, da dort generell viele Menschen auf engem Raum arbeiten und ihre Leistung möglichst nicht durch ein schlechtes Raumklima vermindert werden sollte.
+
+
+
 \newpage
 
 %%% Abbildungsverzeichnis
@@ -531,11 +538,11 @@ wird Anwendung gestartet. Der \gls{Docker}-Container läuft ab jetzt im Hintergr
 
 \tableofcontents
 %%% Abbildungsverzeichnis
-\listoffigures
+% \listoffigures
 %%% Tabellenverzeichnis
 \listoftables
 %%% Codeverzeichnis
-\lstlistoflistings
+% \lstlistoflistings
 
 % \begin{figure}[h!]
 %   \centering
@@ -543,6 +550,9 @@ wird Anwendung gestartet. Der \gls{Docker}-Container läuft ab jetzt im Hintergr
 %   \caption{Gantt-Diagramm}
 %   \label{fig:Gantt}
 % \end{figure}
+
+
+\chapter{Bewertung der CO\texorpdfstring{$_2$}{TEXT} Konzentration in der Raumluft nach \ac{DGUV} \ac{ASR} A3.6}
 
 \begin{table}[htbp]
   \centering
@@ -561,6 +571,8 @@ wird Anwendung gestartet. Der \gls{Docker}-Container läuft ab jetzt im Hintergr
   \end{tabular}
   \label{appendix:tab:dguv_table_co2}
 \end{table}
+
+\chapter{Bewertung der CO\texorpdfstring{$_2$}{TEXT} Konzentration in der Raumluft nach DIN EN 16798-1}
 
 \begin{table}[htbp]
   \centering
