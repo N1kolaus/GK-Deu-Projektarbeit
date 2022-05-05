@@ -282,14 +282,14 @@
 \end{acronym}
 
 %%% Glossareintraege
-\newglossaryentry{backend}
+\newglossaryentry{Backend}
 {
-  name=backend,
+  name=Backend,
   description={Als Backend wird der Teil eines IT-Systems bezeichnet, der sich mit der Datenverarbeitung im Hintergrund beschäftigt – der Data Layer. Der Begriff dient der Unterteilung bei komplexeren Softwarestrukturen. Die Schreibweise wird vom Duden nicht genau vorgegeben. \autocite{backend_definition}}
 }
-\newglossaryentry{frontend}
+\newglossaryentry{Frontend}
 {
-  name=frontend,
+  name=Frontend,
   description={Der Begriff Frontend dient bei komplexeren Softwarestrukturen der Unterteilung. Bei einem IT-System bezeichnet das Frontend die Presentation Layer, also den Teil eines IT-Systems, der näher am Anwender ist. \autocite{frontend_definition}}
 }
 \newglossaryentry{hidraw}
@@ -317,6 +317,16 @@
   name=docker-compose,
   description={docker-compose ist ein Tool, das entwickelt wurde, um die Definition und gemeinsame Nutzung von Multicontainer-Anwendungen zu erleichtern. Mit Compose kann eine YAML-Datei erstellen werden, um die Dienste zu definieren, und mit einem einzigen Befehl können alle Container in Gang gesetzt oder abgebaut werden. \autocite{docker_install}}
 }
+\newglossaryentry{GitHub}
+{
+  name=GitHub,
+  description={GitHub ist ein netzbasierter Dienst zur Versionsverwaltung für Software-Entwicklungsprojekte. Namensgebend war das Versionsverwaltungssystem Git. \autocite{github}}
+}
+\newglossaryentry{FastAPI}
+{
+  name=FastAPI,
+  description={FastAPI ist ein Web-Framework zum Entwickeln von RESTful-APIs in Python. FastAPI basiert auf Pydantic und gibt Hinweise zum Validieren, Serialisieren und Deserialisieren von Daten und zum automatischen Generieren von OpenAPI-Dokumenten. \autocite{fastapi}}
+}
 
 \newpage
 
@@ -327,7 +337,7 @@ Im Laufe der Corona-Pandemie und der damit verbundenen Ausgangsbeschränkungen m
 
 Diese Arbeit soll einen Überblick darüber geben, welche medizinischen Risiken durch eine unzureichende Luftqualität entstehen können und welche positiven Auswirkungen eine ausreichende Versorgung mit Frischluft haben kann.
 
-Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestimmung der Luftqualität in Arbeitsräumen erstellt werden. Dabei soll über die Anforderungen an die Hardware, die benötigten Komponenten, die Einbindung in das Netzwerk und die Umsetzung der dazugehörigen Software eingegangen werden. Die Arbeit richtet sich dabei hauptsächlich an technisch versierte Leser, welche bereits grundlegende Kenntnisse in den Bereichen Hard- und Software besitzen.
+Danach soll ein grober Leitfaden zur Einrichtung eines CO$_2$-Sensors zur Bestimmung der Luftqualität in Arbeitsräumen erstellt werden. Dabei soll über die Anforderungen an die Hardware, die benötigten Komponenten, die Einbindung in das Netzwerk und die Umsetzung der dazugehörigen Software eingegangen werden. Die Arbeit richtet sich dabei hauptsächlich an technisch versierte Leser*innen, welche bereits grundlegende Kenntnisse in den Bereichen Hard- und Software besitzen. Grundsätzlich wird versucht, auch Laien die Grundlagen und die allgemeine Herangehensweise nahe zu legen.
 
 
 \chapter{CO\texorpdfstring{$_2$}{TEXT}-Grenzwerte und deren Auswirkungen auf den Menschen}\label{chapter:2}
@@ -353,13 +363,13 @@ Aus den beiden vorgestellten Bewertungen der CO$_2$-Konzentration für die Rauml
 
 \section{Physiologische Auswirkungen eines zu hohen CO\texorpdfstring{$_2$}{TEXT}-Gehaltes in der Atemluft}
 
-Eine von Kajtár et al. \autocite{kajtar} durchgeführte Studie hat gezeigt, dass eine höhere CO$_2$-Konzentration zu einer schnelleren Erschöpfung beim Lösen von Aufgaben führt. Dafür sollten zehn Probanden unter verschiedenen CO$_2$-Konzentrationen über einen Zeitraum von jeweils zwei mal 70 Minuten einen Text auf Fehler korrigieren. Dabei wurde festgestellt, dass sich die mentale Leistungsfähigkeit im Gegensatz zu einer akzeptablen CO$_2$-Konzentration von \SI{600}{\ac{ppm}} verringert. Die Messung von physiologischen Parametern der Probanden zeigte außerdem, dass das Lösen von Denkaufgaben dadurch ebenfalls anstrengender wird. Bei einem Aufenthalt von zwei bis drei Stunden in einem geschlossenen Raum führte eine CO$_2$-Konzentration von \SI{3000}{\ac{ppm}} zu einer verringerten Konzentrationsfähigkeit.
+Eine von Kajtár et al. \autocite{kajtar} durchgeführte Studie zeigt, dass eine höhere CO$_2$-Konzentration zu einer schnelleren Erschöpfung beim Lösen von Aufgaben führt. Dafür sollten zehn Probanden und Probaninnen unter verschiedenen CO$_2$-Konzentrationen über einen Zeitraum von jeweils zwei mal 70 Minuten einen Text auf Fehler korrigieren. Dabei wurde festgestellt, dass sich die mentale Leistungsfähigkeit im Gegensatz zu einer akzeptablen CO$_2$-Konzentration von \SI{600}{\ac{ppm}} verringert. Die Messung von physiologischen Parametern der Teilnehmenden zeigte außerdem, dass das Lösen von Denkaufgaben dadurch ebenfalls anstrengender wird. Bei einem Aufenthalt von zwei bis drei Stunden in einem geschlossenen Raum führte eine CO$_2$-Konzentration von \SI{3000}{\ac{ppm}} zu einer verringerten Konzentrationsfähigkeit.
 
 Zhang et al. \autocite{zhang} kamen in einer Studie mit 15 Probanden und Probandinnen zu der Erkenntnis, dass eine erhöhte CO$_2$-Konzentration in der Atemluft zu einer stark verringerten Leistungsfähigkeit beim Lösen von Denkaufgaben führt. Dafür wurden die  Teilnehmenden verschiedenen CO$_2$-Konzentrationen (\si{1500}, \si{3500} und \SI{5000}{\ac{ppm}}) ausgesetzt, während sie verschiedene Aufgaben lösen mussten. Der Abfall der Leistungsfähigkeit wurde dabei erst bei der Veränderung der CO$_2$-Konzentration von \SI{1500}{\ac{ppm}} auf \SI{3500}{\ac{ppm}} festgestellt. Bei einem weiteren Anstieg des Wertes auf \SI{5000}{\ac{ppm}} wurden keine weiteren Veränderung der mentalen Leistungsfähigkeit festgestellt.
 
 Bei einer Studie, die von Myhrvold et al. \autocite{myhrvold} mit 548 Schüler*innen durchgeführt wurde, wurden die Auswirkungen auf den Körper, speziell auf das \ac{ZNS}, die Haut und Schleimhaut untersucht. Während bei dieser Studie die Auswirkungen auf die mentale Leistungsfähigkeit nicht signifikant auffällig waren, wirkte sich eine CO$_2$-Konzentration von über \SI{1500}{\ac{ppm}} negativ auf das körperliche Wohlbefinden aus. Dabei wurden unter anderem Symptome wie Kopfschmerzen, Müdigkeit, Konzentrationsschwäche und Hustenanfälle festgestellt.
 
-Ein ähnliches Ergebnis erzielt auch eine von Tiesler et al. \autocite{tiesler} durchgeführte Studie. Dafür wurde der CO$_2$-Gehalt der Atemluft in den Klassenräumen von 16 Klassen aus drei verschiedenen Bremer Schulen und dessen Wirkung auf die Schüler*innen untersucht. Dabei wurde festgestellt, dass sich regelmäßiges Lüften, um die CO$_2$-Konzentration zu senken, positiv auf das Wohlbefinden der  Teilnehmenden auswirkt. Der zu erreichende Zielwert durch das erhöhte Lüftungsintervall lag dabei unter \si{1000} bzw. \SI{1500}{\ac{ppm}}, die vorher  erreichten Werte nach einer Doppelstunde erreichten bis zu \SI{4000}{\ac{ppm}}. Die Schüler*innen berichteten in Befragungen von einer verbesserten Aufmerksamkeit, welche sich wahrscheinlich auf die geringere CO$_2$-Konzentration in der Raumluft zurückführen lässt.
+Ein ähnliches Ergebnis erzielt auch eine von Tiesler et al. \autocite{tiesler} durchgeführte Studie. Dafür wurde der CO$_2$-Gehalt der Atemluft in den Klassenräumen von 16 Klassen aus drei verschiedenen Bremer Schulen und dessen Wirkung auf die Schüler*innen untersucht. Dabei wurde festgestellt, dass sich regelmäßiges Lüften, um die CO$_2$-Konzentration zu senken, positiv auf das Wohlbefinden der  Teilnehmenden auswirkt. Der zu erreichende Zielwert durch das erhöhte Lüftungsintervall lag dabei unter \si{1000} bzw. \SI{1500}{\ac{ppm}}, die vorher erreichten Werte nach einer Doppelstunde erreichten bis zu \SI{4000}{\ac{ppm}}. Die Schüler*innen berichteten in Befragungen nach der Erhöhung der Lüftungsintervalle von einer verbesserten Aufmerksamkeit, welche sich wahrscheinlich auf die geringere CO$_2$-Konzentration in der Raumluft zurückführen lässt.
 
 
 
@@ -368,9 +378,9 @@ Ein ähnliches Ergebnis erzielt auch eine von Tiesler et al. \autocite{tiesler} 
 
 \section{Technische Anforderungen an die benötigte Hardware}
 
-Um einen CO$_2$-Monitor betreiben zu können werden ein Computer und ein CO$_2$-Sensor benötigt. Die Mindestanforderungen an den Computer sind 512MB Arbeitsspeicher, einen ARM Cortex-A53 Quad-Core 1GHz 64-bit Prozessor und mindestens einem USB Type A Anschluss. Diese Werte sind die Mindestanforderungen von einem minimalen Linux Betriebssystem, welches benötigt wird um die Softwareanforderungen zu erfüllen.
+Um einen CO$_2$-Monitor betreiben zu können werden ein Computer und ein CO$_2$-Sensor benötigt. Die Mindestanforderungen an den Computer sind 512MB Arbeitsspeicher, einen ARM Cortex-A53 Quad-Core 1GHz 64-bit Prozessor und mindestens einem USB Typ A Anschluss. Diese Werte sind die Mindestanforderungen eines minimalen Linux Betriebssystems, welches zur Erfüllung der Softwareanforderungen benötigt wird.
 
-Der CO$_2$-Sensor sollte ein Messbereich von \SI{0}{ppm} bis einschließlich \SI{2000}{ppm} vorweisen. Mit dieser Spannweite können die in \vref{chapter:2} vorgestellten Werte für die Aussage über Luftqualität gemessen und aufgezeichnet werden.
+Der CO$_2$-Sensor sollte ein Messbereich von \SI{0}{ppm} bis einschließlich \SI{2000}{ppm} vorweisen. Mit dieser Spannweite können die in \vref{chapter:2} vorgestellten Werte der Luftqualität gemessen und aufgezeichnet werden.
 
 
 \section{Überblick über die verwendete Hardware}
@@ -404,12 +414,12 @@ Um die Programme rund um den CO$_2$-Monitor in Betrieb nehmen zu können, wird f
   \item \gls{docker-compose}
 \end{itemize}
 
-Ist die benötigte Software installiert und eingerichtet, kann mit der Implementierung der Auslese- und Verarbeitungssoftware begonnen werden. Alle in den folgenden Kapiteln genannten Softwarekomponenten sind auf GitHub zu finden.
+Ist die benötigte Software installiert und eingerichtet, kann mit der Implementierung der Auslese- und Verarbeitungssoftware begonnen werden. Alle in den folgenden Kapiteln genannten Softwarekomponenten sind auf \gls{GitHub} unter \url{https://github.com/FMinister/} zu finden.
 
 
 \section{Zusammenspiel der Softwarekomponenten}
 
-Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte abrufbar sind und auch über längere Zeiträume ausgewertet werden können. Dafür werden die CO$_2$- und Temperaturwerte mittels einer Software-Komponente zum Auslesen der Daten an ein \gls{backend} gesendet und gespeichert. Diese Daten können dann mittels eines \gls{frontend}s angezeigt werden. Diese Verknüpfung der Software-Komponenten ist in \vref{fig:Verbundplan} zu sehen.
+Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte abrufbar sind und auch über längere Zeiträume ausgewertet werden können. Dafür werden die CO$_2$- und Temperaturwerte mittels einer Software-Komponente zum Auslesen der Daten an ein \gls{Backend} gesendet und gespeichert. Diese Daten können dann mittels eines \gls{Frontend}s angezeigt werden. Diese Verknüpfung der Software-Komponenten ist in \vref{fig:Verbundplan} zu sehen.
 
 \begin{figure}[htbp]
   \centering
@@ -421,11 +431,11 @@ Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte abru
 
 \section{Aufbau und Einrichten der Software}
 
-\subsection{Aufbau und Einrichten des \gls{backend}s}
+\subsection{Aufbau und Einrichten des Backends}
 
-Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Diese ist in \gls{Python} geschrieben und verwendet FastAPI als Grundlage für das Bereitstellen einer API. Um das Bereitstellen der Anwendung und deren  Isolierung vom Betriebssystem zu erleichtern, wird \gls{Docker} als Containervirtualisierungssoftware eingesetzt.
+Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Diese ist in \gls{Python} geschrieben und verwendet \gls{FastAPI} als Grundlage für das Bereitstellen einer API. Um das Bereitstellen der Anwendung und deren  Isolierung vom Betriebssystem zu erleichtern, wird \gls{Docker} als Containervirtualisierungssoftware eingesetzt.
 
-Nachdem die Anwendung von GitHub bezogen wurde, müssen noch Konfigurationswerte angepasst werden. Beispielsweise muss der Port festgelegt werden, auf dem die \ac{API} erreichbar sein soll. Hierfür kann in der \texttt{docker-compose.yml}-Datei besagter Port angegeben werden, welcher dem \gls{frontend} und dem CO2Reader Zugang zur \gls{backend}-Logik erlaubt, um Daten abzuspeichern und abzurufen.
+Nachdem die Anwendung von \gls{GitHub} bezogen wurde, müssen noch Konfigurationswerte angepasst werden. Beispielsweise muss der Port festgelegt werden, auf dem die \ac{API} erreichbar sein soll. In der \texttt{docker-compose.yml}-Datei kann hierfür besagter Port angegeben werden, welcher dem \gls{Frontend} und dem \textit{CO2Reader} Zugang zur \gls{Backend}-Logik erlaubt, um Daten abzuspeichern und abzurufen.
 
 Durch das Öffnen eines Terminal-Fensters im Ordner der \ac{API} und der Eingabe des Befehls
 
@@ -447,7 +457,7 @@ getestet werden.
 Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Diese Lesesoftware ist in \gls{Python} geschrieben und nutzt die CO2Meter-Bibliothek von Vladimir Filimonov.
 \autocite{github_co2meter}
 
-Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem in \cref{lst:bash:hidraw} zu sehenden Bash-Script angezeigt und die \gls{hidraw}-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden. \autocite{get_usb_hidraw}
+Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{CO2Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem in \cref{lst:bash:hidraw} zu sehenden Bash-Script angezeigt und die \gls{hidraw}-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden. \autocite{get_usb_hidraw}
 
 \begin{lstlisting}[language=docker-compose-2,caption={Bash-Script zum Erkennen der \gls{hidraw}-Id},breaklines=true,label={lst:bash:hidraw}]
   #!/bin/bash
@@ -470,9 +480,9 @@ Ist der USB-Port bestimmt, kann der Teil vor dem Doppelpunkt der \texttt{devices
   ...
 \end{lstlisting}
 
-Soll der \textit{Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die \texttt{co2Reader.ini}-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier der Ort, an dem sich der Sensor befindet, eingetragen werden.
+Soll der \textit{CO2Reader} auf einem anderen Gerät als die \ac{API} ausgeführt werden, muss die \texttt{co2Reader.ini}-Datei angepasst werden. Diese ist in \texttt{app/co2Reader.ini} zu finden. Hier muss die IP-Adresse der \ac{API} anstelle der bestehenden IP-Adresse angegeben werden. Auch kann hier der Standort, an dem sich der Sensor befindet, eingetragen werden.
 
-Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{Readers} geöffnet werden und mittels
+Nach dem Abspeichern der Datei kann ein Terminal-Fenster im Ordner des \textit{CO2Readers} geöffnet werden und mittels
 
 \begin{lstlisting}[language=Bash]
   docker-compose -f docker-compose.yml up -d
@@ -482,18 +492,18 @@ die Anwendung gestartet werden. Der \gls{Docker}-Container läuft ab jetzt im Hi
 
 \subsection{Aufbau und Einrichten des Frontends}
 
-Um die Daten ansehnlich darstellen zu können, kann ein \gls{frontend} eingebunden werden. Das hier verwendete \gls{frontend} ist mit React \autocite{reactjs} und ChartsJs \autocite{chart.js} umgesetzt worden. Ein Beispiel der Datenvisualisierung ist in \vref{fig:frontend} zu sehen.
+Um die Daten ansehnlich darstellen zu können, kann ein \gls{Frontend} eingebunden werden. Das hier verwendete \gls{Frontend} ist mit React \autocite{reactjs} und ChartsJs \autocite{chart.js} umgesetzt worden. Ein Beispiel der Datenvisualisierung ist in \vref{fig:frontend} zu sehen.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{pictures/Frontend.png}
-  \caption{Datenvisualisierung mittels \gls{frontend}}
+  \caption{Datenvisualisierung mittels \gls{Frontend}}
   \label{fig:frontend}
 \end{figure}
 
-Nachdem das \gls{frontend} bezogen wurde muss die \texttt{docker-compose.yml}-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Raspberry Pis, auf dem die \ac{API} läuft ausgetauscht werden, zu sehen in \vref{lst:compose:react_ip}.
+Nachdem das \gls{Frontend} bezogen wurde muss die \texttt{docker-compose.yml}-Datei angepasst werden. In dieser Datei muss die IP-Adresse der \texttt{REACT\_APP\_API\_URL} mit der IP des Netzwerkgerätes, auf dem die \ac{API} läuft ausgetauscht werden, zu sehen in \vref{lst:compose:react_ip}.
 
-Der ausgehende Port, von dem das \gls{frontend} am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt verändert werden, ebenfalls zu sehen in \vref{lst:compose:react_ip}. Hier muss der Port vor dem Doppelpunkt auf den gewünschten Port gesetzt werden.
+Der ausgehende Port, von dem das \gls{Frontend} am Ende erreichbar ist, kann ebenfalls angepasst werden. Hierzu muss lediglich der ports-Abschnitt verändert werden, ebenfalls zu sehen in \vref{lst:compose:react_ip}. Hier muss der Port vor dem Doppelpunkt auf den gewünschten Port gesetzt werden.
 
 \begin{lstlisting}[language=docker-compose-2,caption={Anpassen der \ac{API}-IP und des Ports in der docker-compose.yml},breaklines=true,label={lst:compose:react_ip}]
   ...
@@ -504,7 +514,9 @@ Der ausgehende Port, von dem das \gls{frontend} am Ende erreichbar ist, kann ebe
   ...
 \end{lstlisting}
 
-Mit dem Öffnen eines Terminal-Fensters im Ordner des \gls{frontend}s und mittels
+\newpage
+
+Mit dem Öffnen eines Terminal-Fensters im Ordner des \gls{Frontend}s und mittels
 
 \begin{lstlisting}[language=Bash]
   docker-compose -f docker-compose.yml up -d
