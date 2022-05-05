@@ -305,6 +305,17 @@
       Python ist eine der meist verbreiteten Programmiersprachen weltweit.
       Die Weiterentwicklung der Programmiersprache wird durch die Python Software Foundation und den ursprünglichen Entwickler Guido van Rossum durchgeführt. \autocite{python}}
 }
+\newglossaryentry{Containervirtualisierung}
+{
+  name=Containervirtualisierung,
+  description={ist ein Konzept, bei dem auf einem Betriebssystems mehrere Anwendungen voneinander isoliert betrieben werden können. Das ermöglicht das einfache Bereitstellen von funktionierenden und fertig konfigurierten Anwendungen, besonders im Hinblick auf den Datenaustausch der einzelnen Anwendungen untereinander.\autocite{containervirt_definition}}
+}
+\newglossaryentry{API}
+{
+  name=API,
+  description={ist der englische Fachbegriff für eine Programmierschnittstelle, oder auch Anwendungsschnittstelle.
+  Es handelt sich dabei um einen Programmteil, der genutzt wird, um anderen Anwendungen Funktionen einer Anwendung zur Verfügung zu stellen. In der Regel gibt es dafür eine detaillierte Dokumentation der einzelnen Funktionen mit den jeweiligen Parametern.\autocite{api_definition}}
+}
 \newglossaryentry{Docker}
 {
   name=Docker,
@@ -378,23 +389,23 @@ Ein ähnliches Ergebnis erzielt auch eine von Tiesler et al. \autocite{tiesler} 
 
 \section{Technische Anforderungen an die benötigte Hardware}
 
-Um einen CO$_2$-Monitor betreiben zu können werden ein Computer und ein CO$_2$-Sensor benötigt. Die Mindestanforderungen an den Computer sind 512MB Arbeitsspeicher, einen ARM Cortex-A53 Quad-Core 1GHz 64-bit Prozessor und mindestens einem USB Typ A Anschluss. Diese Werte sind die Mindestanforderungen eines minimalen Linux Betriebssystems, welches zur Erfüllung der Softwareanforderungen benötigt wird.
+Um einen CO$_2$-Monitor betreiben zu können werden ein Computer und ein CO$_2$-Sensor benötigt. Die Mindestanforderungen an den Computer sind 512MB Arbeitsspeicher, ein ARM Cortex-A53 Quad-Core 1GHz 64-bit Prozessor und mindestens ein USB Typ A Anschluss. Diese Werte sind die Mindestanforderungen eines minimalen Linux Betriebssystems, welches zur Erfüllung der Softwareanforderungen benötigt wird.
 
 Der CO$_2$-Sensor sollte ein Messbereich von \SI{0}{ppm} bis einschließlich \SI{2000}{ppm} vorweisen. Mit dieser Spannweite können die in \vref{chapter:2} vorgestellten Werte der Luftqualität gemessen und aufgezeichnet werden.
 
 
 \section{Überblick über die verwendete Hardware}
 
-Für die Verwendung der Programme rund um den CO$_2$-Monitor wird folgende Hardware benötigt:
+Für die Verwendung der Programme rund um den CO$_2$-Monitor wird folgende Hardware verwendet:
 
 \begin{itemize}
   \item Raspberry Pi 3 Model B+
   \item TFA-Dostmann CO$_2$-Monitor AIRCO2NTROL MINI
 \end{itemize}
 
-Der Raspberry Pi ist ein Minicomputer auf einer nur Scheckkarten-großen Platine, der sich vielfältig erweitern lässt.
+Der Raspberry Pi ist ein Minicomputer auf einer Platine von der Größe einer Kreditkarte, der sich vielfältig durch zusätzliche Hardware erweitern lässt.
 Er wurde ursprünglich zu Lern- und Demonstrationszwecken entwickelt, eignet sich aber auch für die
-Realisierung verschiedener privater oder professioneller Anwendungen.
+Realisierung verschiedener privater oder professioneller Anwendungen. Er überzeugt vor allem durch seinen vergleichsweise geringen Anschaffungspreis und die sehr große Internet-Community, die bei Fragen und Problemen bei der Lösungsfindung helfen kann.
 
 Mit dem CO$_2$-Monitor AIRCO2NTROL MINI kann die Luft in Räumen,
 in denen sich Personen aufhalten, z.B. Schulen, Büros, öffentliche Einrichtungen, kontrolliert werden. Der Monitor zeigt auf einem Display den CO$_2$-Gehalt der Raumluft im Wechsel mit der Temperatur an. Eine farbige Ampelanzeige neben dem Display wechselt je nach Luftqualität von Grün über Gelb zu Rot.
@@ -433,7 +444,7 @@ Die Daten des CO$_2$-Sensors werden persistent gespeichert, damit die Werte abru
 
 \subsection{Aufbau und Einrichten des Backends}
 
-Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Diese ist in \gls{Python} geschrieben und verwendet \gls{FastAPI} als Grundlage für das Bereitstellen einer API. Um das Bereitstellen der Anwendung und deren  Isolierung vom Betriebssystem zu erleichtern, wird \gls{Docker} als Containervirtualisierungssoftware eingesetzt.
+Die zentrale Stelle, an der Daten eingehen, gespeichert und abgerufen werden können, wird mittels der \textit{CO2MonitorAPI} realisiert. Diese ist in \gls{Python} geschrieben und verwendet \gls{FastAPI} als Grundlage für das Bereitstellen einer \gls{API}. Um das Bereitstellen der Anwendung und deren  Isolierung vom Betriebssystem zu erleichtern, wird \gls{Docker} als \gls{Containervirtualisierung}s-Software eingesetzt.
 
 Nachdem die Anwendung von \gls{GitHub} bezogen wurde, müssen noch Konfigurationswerte angepasst werden. Beispielsweise muss der Port festgelegt werden, auf dem die \ac{API} erreichbar sein soll. In der \texttt{docker-compose.yml}-Datei kann hierfür besagter Port angegeben werden, welcher dem \gls{Frontend} und dem \textit{CO2Reader} Zugang zur \gls{Backend}-Logik erlaubt, um Daten abzuspeichern und abzurufen.
 
