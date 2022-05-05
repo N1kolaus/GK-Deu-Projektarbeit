@@ -319,7 +319,7 @@ Gegenmaßnahmen wie eine verstärkte Lüftung bis zur Reduktion der Personenzahl
 
 Diese Messungen sollen laut der \ac{ASR} A3.6 \autocite{ASR} in einer Höhe von \SI{1.50}{\metre} und einem Abstand von \si{1} bis \SI{2}{\metre} von Wänden erfolgen, mit einer ausreichend großen Distanz zu Personen, damit diese die Messungen nicht direkt durch ihre Atemluft beeinflussen.
 
-Die vom \ac{UBA} veröffentlichte \enquote{Gesundheitliche Bewertung von Kohlendioxid in der Innenraumluft} \autocite{umweltbundesamt} zitiert aus der DIN EN 13779 „Lüftung von Nichtwohngebäuden – Allgemeine Grundlagen und Anforderungen an Lüftungs- und Klimaanlagen und Raumkühlsysteme“ \autocite{din_en_13779}, welche die CO$_2$-Grenzwerte strikter und feingranularer als die \ac{DGUV} beurteilt. Bei Werten unter \SI{800}{\ac{ppm}} wird dabei von einer hohen Raumluftqualität gesprochen, von \si{800} bis \SI{1000}{\ac{ppm}} gilt die Raumluftqualität als \enquote{mittlere Raumluftqualität}. CO$_2$-Konzentrationen von \si{1000} bis \SI{1400}{\ac{ppm}} werden als \enquote{Mäßige Raumluftqualität} und Werte über \SI{1400}{\ac{ppm}} als \enquote{Niedrige Raumluftqualität} eingestuft.
+Die DIN EN 16798-1 \autocite{din_en_16798} \enquote{Energetische Bewertung von Gebäuden - Lüftung von Gebäuden} \autocite{din_en_16798}, regelt die CO$_2$-Grenzwerte strikter und feingranularer als die \ac{ASR} A3.6 \autocite{ASR}. Wie in \vref{appendix:tab:appendix:tab:din_table_co2} wird bei Werten unter \SI{950}{\ac{ppm}} von einer hohen Raumluftqualität gesprochen, von \si{950} bis \SI{1200}{\ac{ppm}} gilt die Raumluftqualität als \enquote{mittlere Raumluftqualität}. CO$_2$-Konzentrationen von \si{1200} bis \SI{1750}{\ac{ppm}} werden als \enquote{Mäßige Raumluftqualität} und Werte über \SI{1750}{\ac{ppm}} als \enquote{Niedrige Raumluftqualität} eingestuft.
 
 Aus den beiden vorgestellten Bewertungen der CO$_2$-Konzentration für die Raumluft kann geschlossen werden, dass die CO$_2$-Konzentration generell nicht über \SI{1000}{\ac{ppm}} steigen sollte, damit die Raumluft eine ausreichend hohe Qualität aufweist.
 
@@ -502,9 +502,13 @@ wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund un
 \appendix
 \ihead{Anhang}
 
-
-
-\chapter{this, that, etc.}\label{appendix:tab:dguv_table_co2}
+\tableofcontents
+%%% Abbildungsverzeichnis
+\listoffigures
+%%% Tabellenverzeichnis
+\listoftables
+%%% Codeverzeichnis
+\lstlistoflistings
 
 % \begin{figure}[h!]
 %   \centering
@@ -513,9 +517,37 @@ wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund un
 %   \label{fig:Gantt}
 % \end{figure}
 
+\begin{table}[htbp]
+  \centering
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Bewertung der CO$_2$ Konzentration in der Raumluft nach \ac{DGUV} \ac{ASR} A3.6 \autocite{ASR}}
+  \begin{tabular}{c|p{0.6\textwidth}}
+    CO$_2$-Konzentration in \ac{ppm} &  Maßnahmen                               \\
+    \hline
+    $<$1000 &  $\bullet$ Keine weiteren Maßnahmen (sofern durch die Raumnutzung kein Konzentrationsanstieg über 1000 ppm zu erwarten ist) \\
+    \hline
+    1000-2000 & $\bullet$ Lüftungsverhalten überprüfen und verbessern \\
+              & $\bullet$ Lüftungsplan aufstellen (z. B. Verantwortlichkeiten festlegen) \\
+              & $\bullet$ Lüftungsmaßnahme (z. B. Außenluftvolumenstrom oder Luftwechsel erhöhen) \\
+    \hline
+    $>$2000 &  $\bullet$ weitergehende Maßnahmen erforderlich (z. B. verstärkte Lüftung, Reduzierung der Personenzahl im Raum) \\
+  \end{tabular}
+  \label{appendix:tab:dguv_table_co2}
+\end{table}
 
-
-\chapter{Something something}
-
+\begin{table}[htbp]
+  \centering
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Bewertung der CO$_2$ Konzentration in der Raumluft nach DIN EN 16798-1 \autocite{din_en_16798}}
+  \begin{tabular}{c|p{0.6\textwidth}}
+    CO$_2$-Konzentration in \ac{ppm} & Beschreibung   \\
+    \hline
+    $<$950 & Hohe Raumluftqualität \\
+    950-1200 & Mittlere Raumluftqualität \\
+    1200-1750 & Mäßige Raumluftqualität \\
+    $>$1750 & Niedrige Raumluftqualität\\
+  \end{tabular}
+  \label{appendix:tab:din_table_co2}
+\end{table}
 
 \end{document}
