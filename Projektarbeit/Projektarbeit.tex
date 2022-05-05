@@ -275,6 +275,7 @@
   \acro{API}{Application Programming Interface}
   \acro{ASR}{Technische Regeln für Arbeitsstätten}
   \acro{DGUV}{Deutsche Gesetzliche Unfallversicherung}
+  \acro{HIDs}{Human Interface Devices}
   \acro{ppm}{parts per million}
   \acro{UBA}{Umweltbundesamt}
   \acro{ZNS}{Zentralnervensystem}
@@ -289,13 +290,18 @@
 \newglossaryentry{frontend}
 {
   name=frontend,
-  description={ADer Begriff Frontend dient bei komplexeren Softwarestrukturen der Unterteilung. Bei einem IT-System bezeichnet das Frontend die Presentation Layer, also den Teil eines IT-Systems, der näher am Anwender ist. \autocite{frontend_definition}}
+  description={Der Begriff Frontend dient bei komplexeren Softwarestrukturen der Unterteilung. Bei einem IT-System bezeichnet das Frontend die Presentation Layer, also den Teil eines IT-Systems, der näher am Anwender ist. \autocite{frontend_definition}}
+}
+\newglossaryentry{hidraw}
+{
+  name=hidraw,
+  description={Der hidraw-Treiber bietet eine Rohschnittstelle zu USB- und Bluetooth-\ac{HIDs}.}
 }
 
 \newpage
 
 
-\chapter{Motivation}
+\chapter{Einleitung}
 
 Im Laufe der Corona-Pandemie und der damit verbundenen Ausgangsbeschränkungen musste man sich zunehmen in Innenräumen aufhalten, um der Verbreitung des Virus entgegenzuwirken. Aus diesem Grund musste man sich zwangsweise mit der Luftqualität im Homeoffice und besonders in Büroräumen auseinandersetzen, um das Gesundheitsrisiko zu minimieren und konzentriert arbeiten zu können. Da die Luftqualität durch Menschen meist nur subjektiv wahrgenommen werden kann, benötigt man dafür eine Messstelle. Da die gesundheitlichen Auswirkungen von schlechter Raumluftqualität ausreichend erforscht sind, existieren genügend konkrete Werte zur Orientierung.
 
@@ -320,7 +326,7 @@ Gegenmaßnahmen wie eine verstärkte Lüftung bis zur Reduktion der Personenzahl
 
 Diese Messungen sollen laut der \ac{ASR} A3.6 \autocite{ASR} in einer Höhe von \SI{1.50}{\metre} und einem Abstand von \si{1} bis \SI{2}{\metre} von Wänden erfolgen, mit einer ausreichend großen Distanz zu Personen, damit diese die Messungen nicht direkt durch ihre Atemluft beeinflussen.
 
-Die DIN EN 16798-1 \autocite{din_en_16798} \enquote{Energetische Bewertung von Gebäuden - Lüftung von Gebäuden} \autocite{din_en_16798}, regelt die CO$_2$-Grenzwerte strikter und feingranularer als die \ac{ASR} A3.6 \autocite{ASR}. Wie in \vref{appendix:tab:appendix:tab:din_table_co2} wird bei Werten unter \SI{950}{\ac{ppm}} von einer hohen Raumluftqualität gesprochen, von \si{950} bis \SI{1200}{\ac{ppm}} gilt die Raumluftqualität als \enquote{mittlere Raumluftqualität}. CO$_2$-Konzentrationen von \si{1200} bis \SI{1750}{\ac{ppm}} werden als \enquote{Mäßige Raumluftqualität} und Werte über \SI{1750}{\ac{ppm}} als \enquote{Niedrige Raumluftqualität} eingestuft.
+Die DIN EN 16798-1 \autocite{din_en_16798} \enquote{Energetische Bewertung von Gebäuden - Lüftung von Gebäuden} \autocite{din_en_16798}, regelt die CO$_2$-Grenzwerte strikter und feingranularer als die \ac{ASR} A3.6 \autocite{ASR}. Wie in \vref{appendix:tab:din_table_co2} wird bei Werten unter \SI{950}{\ac{ppm}} von einer hohen Raumluftqualität gesprochen, von \si{950} bis \SI{1200}{\ac{ppm}} gilt die Raumluftqualität als \enquote{mittlere Raumluftqualität}. CO$_2$-Konzentrationen von \si{1200} bis \SI{1750}{\ac{ppm}} werden als \enquote{Mäßige Raumluftqualität} und Werte über \SI{1750}{\ac{ppm}} als \enquote{Niedrige Raumluftqualität} eingestuft.
 
 Aus den beiden vorgestellten Bewertungen der CO$_2$-Konzentration für die Raumluft kann geschlossen werden, dass die CO$_2$-Konzentration generell nicht über \SI{1000}{\ac{ppm}} steigen sollte, damit die Raumluft eine ausreichend hohe Qualität aufweist.
 
@@ -420,9 +426,9 @@ getestet werden.
 Die Daten des CO$_2$-Sensors werden mittels der USB-Schnittstelle ausgelesen. Diese Lesesoftware ist in Python geschrieben und nutzt die CO2Meter-Bibliothek von Vladimir Filimonov.
 \autocite{github_co2meter}
 
-Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem in \cref{lst:bash:hidraw} zu sehenden Bash-Script angezeigt und die hidraw-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden. \autocite{get_usb_hidraw}
+Dazu muss die \texttt{docker-compose.yml}-Datei des \textit{Readers} angepasst werden. Um den richtigen USB-Port in die Datei schreiben zu können, können alle angeschlossenen USB-Geräte mit dem in \cref{lst:bash:hidraw} zu sehenden Bash-Script angezeigt und die \gls{hidraw}-Id des Geräts \textit{Holtek Semiconductor, Inc. USB-zyTemp} ausgelesen werden. \autocite{get_usb_hidraw}
 
-\begin{lstlisting}[language=docker-compose-2,caption={Bash-Script zum Erkennen der hidraw-Id},breaklines=true,label={lst:bash:hidraw}]
+\begin{lstlisting}[language=docker-compose-2,caption={Bash-Script zum Erkennen der \gls{hidraw}-Id},breaklines=true,label={lst:bash:hidraw}]
   #!/bin/bash
 
   FILES=/dev/hidraw*
@@ -525,15 +531,15 @@ wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund un
   \renewcommand{\arraystretch}{1.25}
   \caption{Bewertung der CO$_2$ Konzentration in der Raumluft nach \ac{DGUV} \ac{ASR} A3.6 \autocite{ASR}}
   \begin{tabular}{c|p{0.6\textwidth}}
-    CO$_2$-Konzentration in \ac{ppm} &  Maßnahmen                               \\
+    CO$_2$-Konzentration in \ac{ppm} & Maßnahmen                                                                                                                  \\
     \hline
-    $<$1000 &  $\bullet$ Keine weiteren Maßnahmen (sofern durch die Raumnutzung kein Konzentrationsanstieg über 1000 ppm zu erwarten ist) \\
+    $<$1000                          & $\bullet$ Keine weiteren Maßnahmen (sofern durch die Raumnutzung kein Konzentrationsanstieg über 1000 ppm zu erwarten ist) \\
     \hline
-    1000-2000 & $\bullet$ Lüftungsverhalten überprüfen und verbessern \\
-              & $\bullet$ Lüftungsplan aufstellen (z. B. Verantwortlichkeiten festlegen) \\
-              & $\bullet$ Lüftungsmaßnahme (z. B. Außenluftvolumenstrom oder Luftwechsel erhöhen) \\
+    1000-2000                        & $\bullet$ Lüftungsverhalten überprüfen und verbessern                                                                      \\
+                                     & $\bullet$ Lüftungsplan aufstellen (z. B. Verantwortlichkeiten festlegen)                                                   \\
+                                     & $\bullet$ Lüftungsmaßnahme (z. B. Außenluftvolumenstrom oder Luftwechsel erhöhen)                                          \\
     \hline
-    $>$2000 &  $\bullet$ weitergehende Maßnahmen erforderlich (z. B. verstärkte Lüftung, Reduzierung der Personenzahl im Raum) \\
+    $>$2000                          & $\bullet$ weitergehende Maßnahmen erforderlich (z. B. verstärkte Lüftung, Reduzierung der Personenzahl im Raum)            \\
   \end{tabular}
   \label{appendix:tab:dguv_table_co2}
 \end{table}
@@ -543,12 +549,12 @@ wird Anwendung gestartet. Der Docker-Container läuft ab jetzt im Hintergrund un
   \renewcommand{\arraystretch}{1.25}
   \caption{Bewertung der CO$_2$ Konzentration in der Raumluft nach DIN EN 16798-1 \autocite{din_en_16798}}
   \begin{tabular}{c|p{0.6\textwidth}}
-    CO$_2$-Konzentration in \ac{ppm} & Beschreibung   \\
+    CO$_2$-Konzentration in \ac{ppm} & Beschreibung              \\
     \hline
-    $<$950 & Hohe Raumluftqualität \\
-    950-1200 & Mittlere Raumluftqualität \\
-    1200-1750 & Mäßige Raumluftqualität \\
-    $>$1750 & Niedrige Raumluftqualität\\
+    $<$950                           & Hohe Raumluftqualität     \\
+    950-1200                         & Mittlere Raumluftqualität \\
+    1200-1750                        & Mäßige Raumluftqualität   \\
+    $>$1750                          & Niedrige Raumluftqualität \\
   \end{tabular}
   \label{appendix:tab:din_table_co2}
 \end{table}
