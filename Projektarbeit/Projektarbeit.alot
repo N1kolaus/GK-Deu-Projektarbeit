@@ -1,4 +1,4 @@
-\babel@toc {ngerman}{}
+\babel@toc {ngerman}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -6,6 +6,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {A.1}{\ignorespaces Bewertung der CO$_2$ Konzentration in der Raumluft nach \ac {DGUV} \ac {ASR} A3.6 \autocite {ASR}}}{24}{table.A.1}% 
+\contentsline {table}{\numberline {A.1}{\ignorespaces Bewertung der CO$_2$ Konzentration in der Raumluft nach \ac {DGUV} \ac {ASR} A3.6 \blx@tocontentsinit {0}\autocite {ASR}}}{24}{table.A.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Bewertung der CO$_2$ Konzentration in der Raumluft nach DIN EN 16798-1 \autocite {din_en_16798}}}{25}{table.B.1}% 
+\contentsline {table}{\numberline {B.1}{\ignorespaces Bewertung der CO$_2$ Konzentration in der Raumluft nach DIN EN 16798-1 \blx@tocontentsinit {0}\autocite {din_en_16798}}}{25}{table.B.1}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
