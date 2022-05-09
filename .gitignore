@@ -283,3 +283,12 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 Bordon/Risikoanalyse/Risikoanalyse als Werkzeug des PM.avi
+
+# slidev
+node_modules
+.DS_Store
+dist
+*.local
+index.html
+.remote-assets
+components.d.ts
