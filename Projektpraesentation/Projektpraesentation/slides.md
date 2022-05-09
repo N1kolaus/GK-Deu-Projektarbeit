@@ -93,22 +93,52 @@ JULIUS
 PAUL
 
 ---
-
-## Aufbau und Einrichtung des Backends
-
-JOHANNES
-
+layout: two-cols
 ---
 
-## Aufbau und Einrichtung der Lese-Software
+## Zusammenspiel der Softwarekomponenten
 
-JOHANNES
+<br />
+<br />
+
+- Backend
+- Frontend
+- Datenbank
+- Lese-Software
+- Docker
+
+::right::
+
+<br />
+<br />
+
+<img src="/images/SoftwareZusammenspiel.png" class="m-1 h-100 rounded shadow" />
 
 ---
+layout: two-cols
+---
 
-## Aufbau und Einrichtung des Frontends
+## Aufbau und Einrichtung der Softwarekomponenten
 
-JOHANNES
+<br />
+<br />
+
+  - Backend: Python mit FastAPI
+  - Frontend: React und ChartJs
+  - Lese-Software: Python-Script
+
+<br />
+
+```
+docker - compose -f docker - compose . yml up -d
+```
+
+::right::
+
+  <br />
+  <br />
+
+  <img src="/images/SoftwareKomponenten.png" class="m-1 h-90 rounded shadow" />
 
 ---
 
