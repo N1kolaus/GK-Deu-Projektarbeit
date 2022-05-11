@@ -165,11 +165,32 @@
 
 \section{Hardwaretechnische Umsetzung JULIUS}
 
-\section{Softwaretechnische Umsetzung PAUL / JOHANNES}
+\section{Softwaretechnische Umsetzung}
 
-\subsection{Grundlagen PAUL}
+\subsection{Grundlagen}
+\begin{frame}[fragile]{Grundlagen}
+    \begin{minipage}[t]{0.49\textwidth}
+      \begin{itemize}
+        \item Linux-Distribution inklusive mitgelieferter Standardsoftware
+        \item Docker
+        \item Python
+        \item FastAPI
+        \item React
+        \item ChartJs
+        \item SQLite
+      \end{itemize}
+    \end{minipage}
+    \begin{minipage}[t]{0.49\textwidth}
+      \begin{figure}
+        \centering
+        \captionsetup{justification=centering}
+        \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
+        \caption{Verwendete Softwarekomponenten}
+      \end{figure}
+    \end{minipage}
+\end{frame}
 
-\subsection{Zusammenspiel der Softwarekomponenten JOHANNES}
+\subsection{Zusammenspiel der Softwarekomponenten}
 
 \begin{frame}[fragile]{Zusammenspiel der Softwarekomponenten}
 
@@ -185,7 +206,8 @@
   \begin{minipage}[t]{0.69\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[width=1\textwidth]{pictures/SoftwareZusammenspiel.png}
+      \captionsetup{justification=centering}
+      \includegraphics[width=170px]{pictures/SoftwareZusammenspiel.png}
       \caption{Zusammenspiel der Softwarekomponenten}
     \end{figure}
   \end{minipage}
@@ -203,20 +225,24 @@
       \item Datenbank: SQLite
     \end{itemize}
   \end{minipage}
-  \begin{minipage}[t]{0.49\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
-      \caption{Zusammenspiel der Softwarekomponenten}
-    \end{figure}
-  \end{minipage}
 
   \begin{lstlisting}[language=Bash]
     docker-compose -f docker-compose.yml up -d
   \end{lstlisting}
 \end{frame}
 
-\section{Fazit JULIUS}
+\section{Fazit}
+\begin{frame}[fragile]{Fazit}
+  \begin{minipage}[t]{0.80\textwidth}
+    \textbf{Ergebnisse:}\newline
+    \begin{itemize}
+      \item bestätigte Relevanz der Raumluftqualität
+      \item bestätigte Verbindung zwischen hohen CO$_2$-Konzentrationen und verminderter Konzentrationsfähigkeit/Produktivität
+      \item schaffen einer kostengünstigen Möglichkeit zur selbstständigen Kontrolle der Raumluftqualität
+    \end{itemize}
+  \end{minipage}
+\end{frame}
+
 
 % \section{Geschichte}
 
