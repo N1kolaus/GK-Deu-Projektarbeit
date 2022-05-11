@@ -150,8 +150,8 @@
 
 \maketitle
 
-\begin{frame}{Inhaltsverzeichnis}
-  \setbeamertemplate{section in toc}[sections numbered]
+\begin{frame}{Gliederung}
+  \setbeamertemplate{section in toc}[sections]
   \tableofcontents[hideallsubsections]
 \end{frame}
 
@@ -171,7 +171,50 @@
 
 \subsection{Zusammenspiel der Softwarekomponenten JOHANNES}
 
+\begin{frame}[fragile]{Zusammenspiel der Softwarekomponenten}
+
+  \begin{minipage}[t]{0.29\textwidth}
+    \begin{itemize}
+      \item Backend
+      \item Frontend
+      \item Datenbank
+      \item Lese-Software
+      \item[$\rightarrow$] Docker
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}[t]{0.69\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\textwidth]{pictures/SoftwareZusammenspiel.png}
+      \caption{Zusammenspiel der Softwarekomponenten}
+    \end{figure}
+  \end{minipage}
+\end{frame}
+
 \subsection{Aufbau und Einrichtung der Softwarekomponenten JOHANNES}
+
+\begin{frame}[fragile]{Aufbau und Einrichtung der Softwarekomponenten}
+
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{itemize}
+      \item Backend: Python mit FastAPI
+      \item Frontend: React und ChartsJs
+      \item Lese-Software: Python-Script
+      \item Datenbank: SQLite
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
+      \caption{Zusammenspiel der Softwarekomponenten}
+    \end{figure}
+  \end{minipage}
+
+  \begin{lstlisting}[language=Bash]
+    docker-compose -f docker-compose.yml up -d
+  \end{lstlisting}
+\end{frame}
 
 \section{Fazit JULIUS}
 
