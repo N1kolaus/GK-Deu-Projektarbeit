@@ -175,9 +175,9 @@
 \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
 \begin{frame}[fragile]{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
   \begin{itemize}
-    \item Atmosphäre hat 400 ppm CO$_2$
-    \item ab 1000 ppm CO$_2$ bedenklich laut DGUV ASR A3.6
-    \item ab 950 ppm CO$_2$ bedenklich laut DIN EN 16798-1
+    \item Atmosphäre hat 400 ppm CO$_2$ \autocite{umweltbundesamt}
+    \item ab 1000 ppm CO$_2$ bedenklich laut DGUV ASR A3.6 \autocite{ASR}
+    \item ab 950 ppm CO$_2$ bedenklich laut DIN EN 16798-1 \autocite{din_en_16798}
   \end{itemize}
 \end{frame}
 
@@ -190,7 +190,7 @@
       1000-2000                   & hygienisch auffällig    \\ \hline
       $>$2000                     & hygienisch inakzeptabel \\ \hline
     \end{tabular}
-    \caption{nach DGUV ASR A3.6}
+    \caption{nach DGUV ASR A3.6 \autocite{ASR}}
   \end{table}
   \begin{table}
     \begin{tabular}{|c|p{0.49\textwidth}|}
@@ -201,7 +201,7 @@
       1200-1750                   & Mäßige Raumluftqualität   \\ \hline
       $>$1750                     & Niedrige Raumluftqualität \\ \hline
     \end{tabular}
-    \caption{nach DIN EN 16798-1}
+    \caption{nach DIN EN 16798-1 \autocite{din_en_16798}}
   \end{table}
 \end{frame}
 
@@ -216,6 +216,8 @@
     \item Müdigkeit
     \item Hustenanfälle
   \end{itemize}
+
+  Quellen: \autocite{umweltbundesamt} \autocite{din_en_16798} \autocite{ASR} \autocite{kajtar} \autocite{zhang} \autocite{myhrvold} \autocite{tiesler}
 \end{frame}
 
 \section{Hardwaretechnische Umsetzung}
@@ -234,7 +236,7 @@
     \centering
     \captionsetup{justification=centering}
     \includegraphics[trim={0 10cm 0 10cm},clip,width=0.85\textwidth]{pictures/co2monitor.png}
-    \caption{TFA Dostmann AIRCO2NTROL MINI}
+    \caption{TFA Dostmann AIRCO2NTROL MINI \autocite{co2monitor}}
   \end{figure}
 \end{frame}
 
@@ -259,7 +261,7 @@
       \centering
       \captionsetup{justification=centering}
       \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
-      \caption{Verwendete Softwarekomponenten}
+      \caption{Verwendete Softwarekomponenten \autocite{dockerLogo}\autocite{fastapiLogo}\autocite{sqliteLogo}\autocite{reactLogo}\autocite{pythonLogo}\autocite{chartjsLogo}}
     \end{figure}
   \end{minipage}
 \end{frame}
@@ -271,7 +273,7 @@
     \centering
     \captionsetup{justification=centering}
     \includegraphics[width=0.6\textwidth]{pictures/SoftwareZusammenspiel.png}
-    \caption{Zusammenspiel der Softwarekomponenten}
+    \caption{Zusammenspiel der Softwarekomponenten \autocite{co2monitor}\autocite{rasPi}}
   \end{figure}
 \end{frame}
 
