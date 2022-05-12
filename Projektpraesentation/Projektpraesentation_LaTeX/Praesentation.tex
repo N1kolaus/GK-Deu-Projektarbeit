@@ -9,7 +9,15 @@
 
 \usepackage[utf8]{inputenc}
 
-\usepackage[bibencoding=utf8,sortlocale=de_DE,style=footnote-dw,ibidpage=true,origfieldsformat=brackets,backend=biber]{biblatex}
+\usepackage[bibencoding=utf8,
+			sortlocale=de,
+			style=numeric,
+			pagetracker=true,
+			autocite=inline,
+			backrefstyle=three+,
+			date=short,
+			sorting=nty,
+			backend=biber]{biblatex}
 \addbibresource{Literaturverzeichnis.bib}
 \renewcommand\bibname{Literaturverzeichnis}
 
@@ -157,110 +165,117 @@
 
 \section{Einleitung}
 \begin{frame}[fragile]{Einleitung}
-\begin{minipage}[t]{1\textwidth}
-\begin{quotation}
-  Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-\end{quotation}
-\end{minipage}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
 \end{frame}
 
 \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
 \begin{frame}[fragile]{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
-    \begin{itemize}
-      \item Atmosphäre hat 400 ppm CO$_2$
-      \item ab 1000 ppm CO$_2$ bedenklich laut DGUV ASR A3.6 
-      \item ab 950 ppm CO$_2$ bedenklich laut DIN EN 16798-1
-    \end{itemize}  
+  \begin{itemize}
+    \item Atmosphäre hat 400 ppm CO$_2$
+    \item ab 1000 ppm CO$_2$ bedenklich laut DGUV ASR A3.6
+    \item ab 950 ppm CO$_2$ bedenklich laut DIN EN 16798-1
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
   \begin{table}
-  \begin{tabular}{ |c|p{0.49\textwidth}|}
-    \hline
-    CO$_2$-Konzentration in ppm & Bewertung \\ \hline
-    $<$1000                          & hygienisch unbedenklich \\ \hline
-    1000-2000                        & hygienisch auffällig \\ \hline
-    $>$2000                         & hygienisch inakzeptabel\\ \hline
-  \end{tabular}
-  \caption{nach DGUV ASR A3.6}
-\end{table}
+    \begin{tabular}{ |c|p{0.49\textwidth}|}
+      \hline
+      CO$_2$-Konzentration in ppm & Bewertung               \\ \hline
+      $<$1000                     & hygienisch unbedenklich \\ \hline
+      1000-2000                   & hygienisch auffällig    \\ \hline
+      $>$2000                     & hygienisch inakzeptabel \\ \hline
+    \end{tabular}
+    \caption{nach DGUV ASR A3.6}
+  \end{table}
   \begin{table}
-  \begin{tabular}{|c|p{0.49\textwidth}|}
-    \hline
-    CO$_2$-Konzentration in ppm & Bewertung \\ \hline
-    $<$950                          &  Hohe Raumluftqualität \\ \hline
-    950-1200                        &  Mittlere Raumluftqualität \\ \hline
-    1200-1750                        & Mäßige Raumluftqualität \\ \hline
-    $>$1750                          & Niedrige Raumluftqualität\\ \hline
-  \end{tabular}
-  \caption{nach DIN EN 16798-1}
-\end{table}
+    \begin{tabular}{|c|p{0.49\textwidth}|}
+      \hline
+      CO$_2$-Konzentration in ppm & Bewertung                 \\ \hline
+      $<$950                      & Hohe Raumluftqualität     \\ \hline
+      950-1200                    & Mittlere Raumluftqualität \\ \hline
+      1200-1750                   & Mäßige Raumluftqualität   \\ \hline
+      $>$1750                     & Niedrige Raumluftqualität \\ \hline
+    \end{tabular}
+    \caption{nach DIN EN 16798-1}
+  \end{table}
 \end{frame}
 
 \section{Auswirkungen eines zu hohen CO$_2$-Gehaltes in der Raumluft}
 \begin{frame}[fragile]{Auswirkungen eines zu hohen CO$_2$-Gehaltes in der Raumluft}
   \begin{itemize}
-      \item verringerte Konzentrationsfähigkeit
-      \item verringerte Leistungsfähigkeit
-      \item Halsschmerzen
-      \item Kopfschmerzen
-      \item Unwohlsein
-      \item Müdigkeit
-      \item Hustenanfälle
+    \item verringerte Konzentrationsfähigkeit
+    \item verringerte Leistungsfähigkeit
+    \item Halsschmerzen
+    \item Kopfschmerzen
+    \item Unwohlsein
+    \item Müdigkeit
+    \item Hustenanfälle
   \end{itemize}
 \end{frame}
-  
-\section{Hardwaretechnische Umsetzung JULIUS}
+
+\section{Hardwaretechnische Umsetzung}
+
+\begin{frame}[fragile]{Raspberry Pi 3B+}
+  \begin{figure}
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.55\textwidth]{pictures/RasPi.png}
+    \caption{Raspberry Pi 3B+ \autocite{rasPi}}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{CO$_2$-Sensor}
+  \begin{figure}
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[trim={0 10cm 0 10cm},clip,width=0.85\textwidth]{pictures/co2monitor.png}
+    \caption{TFA Dostmann AIRCO2NTROL MINI}
+  \end{figure}
+\end{frame}
+
 
 \section{Softwaretechnische Umsetzung}
 
 \subsection{Grundlagen}
 \begin{frame}[fragile]{Grundlagen}
-    \begin{minipage}[t]{0.49\textwidth}
-      \begin{itemize}
-        \item Linux-Distribution inklusive mitgelieferter Standardsoftware
-        \item Docker
-        \item Python
-        \item FastAPI
-        \item React
-        \item ChartJs
-        \item SQLite
-      \end{itemize}
-    \end{minipage}
-    \begin{minipage}[t]{0.49\textwidth}
-      \begin{figure}
-        \centering
-        \captionsetup{justification=centering}
-        \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
-        \caption{Verwendete Softwarekomponenten}
-      \end{figure}
-    \end{minipage}
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{itemize}
+      \item Linux-Distribution inklusive mitgelieferter Standardsoftware
+      \item Docker
+      \item Python
+      \item FastAPI
+      \item React
+      \item ChartJs
+      \item SQLite
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{figure}
+      \centering
+      \captionsetup{justification=centering}
+      \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
+      \caption{Verwendete Softwarekomponenten}
+    \end{figure}
+  \end{minipage}
 \end{frame}
 
 \subsection{Zusammenspiel der Softwarekomponenten}
 
 \begin{frame}[fragile]{Zusammenspiel der Softwarekomponenten}
-
-  \begin{minipage}[t]{0.29\textwidth}
-    \begin{itemize}
-      \item Backend
-      \item Frontend
-      \item Datenbank
-      \item Lese-Software
-      \item[$\rightarrow$] Docker
-    \end{itemize}
-  \end{minipage}
-  \begin{minipage}[t]{0.69\textwidth}
-    \begin{figure}
-      \centering
-      \captionsetup{justification=centering}
-      \includegraphics[width=170px]{pictures/SoftwareZusammenspiel.png}
-      \caption{Zusammenspiel der Softwarekomponenten}
-    \end{figure}
-  \end{minipage}
+  \begin{figure}
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=0.6\textwidth]{pictures/SoftwareZusammenspiel.png}
+    \caption{Zusammenspiel der Softwarekomponenten}
+  \end{figure}
 \end{frame}
 
-\subsection{Aufbau und Einrichtung der Softwarekomponenten JOHANNES}
+\subsection{Aufbau und Einrichtung der Softwarekomponenten}
 
 \begin{frame}[fragile]{Aufbau und Einrichtung der Softwarekomponenten}
 
@@ -290,110 +305,6 @@
   \end{minipage}
 \end{frame}
 
-
-% \section{Geschichte}
-
-% \begin{frame}[fragile]{Geschichte\footcite{wiki:python}}
-
-%   \begin{minipage}[t]{0.69\textwidth}
-%     \begin{itemize}
-%       \item Entwickler: Guide van Rossum
-%       \item Erscheinungsjahr: 20. Februar 1991
-%       \item Name bezieht sich auf die Komikergruppe Monty Python
-%       \item Open-Source
-%       \item Python 2.0: 16. Oktober 2000 (Garbage Collection, Unicode)
-%       \item Python 3.0: 03. Dezember 2008
-%     \end{itemize}
-%   \end{minipage}
-%   \begin{minipage}[t]{0.29\textwidth}
-%     \begin{figure}
-%       \centering
-%       \includegraphics[width=0.9\textwidth]{pictures/Guido_van_Rossum.jpg}
-%       \caption[Guido van Rossum, https://upload.wikimedia.org/wikipedia/commons/c/c6/Guido_van_Rossum.jpg, abgerufen am 16.11.2021 ]{Guido van Rossum, Entwickler von Python}
-%     \end{figure}
-%   \end{minipage}
-% \end{frame}
-
-% \section{Grundlagen}
-
-% \begin{frame}[fragile]{Basiscs\footcite{wiki:python}}
-%   \begin{itemize}
-%     \item Beliebteste Programmiersprache laut PYPL-Index (PopularitY of Programming Language, Stand: November 2021)
-%     \item universelle, interpretierte, höhere Programmiersprache
-%     \item Anspruch: gut lesbarer, knapper Programmierstil
-%     \item Sehr Anfängerfreundlich
-%     \item Multiparadigmensprache: OOP oder funktional
-%     \item Blöcke durch Einrückungen
-%     \item als Datei oder Notebook angelegt
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}[fragile]{Ranking: Beliebtheit von Programmiersprachen}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=1\textwidth]{pictures/statista_ranking.png}
-%     \caption[Beliebtesten Programmiersprachen, https://de.statista.com/statistik/daten/studie/678732/umfrage/beliebteste-programmiersprachen-weltweit-laut-pypl-index/\#professional, abgerufen am 16.11.2021 ]{Die beliebtesten Programmiersprachen weltweit laut PYPL-Index im November 2021}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}[fragile]{Firmenbeispiele}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{pictures/who_uses_python.png}
-%     \caption[Weltweit agierende Firmen, die Python nutzen, https://www.monocubed.com/companies-that-use-python/, abgerufen am 16.11.2021 ]{Weltweit agierende Firmen, die Python nutzen}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}[fragile]{Hauptverwendungszwecke\footcite{coursera:pythonPopularity}}
-%   \begin{itemize}
-%     \item Sever Side Applications
-%     \item Automatisierung von Aufgaben und Scripting
-%     \item Big Data: Datenanalyse
-%     \item Machine learning
-%     \item Softwaretests und Prototyping
-%   \end{itemize}
-% \end{frame}
-
-% \section{Nutzung und Beispiele}
-
-% \begin{frame}[fragile]{.py vs .ipynb}
-
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.7\textwidth]{pictures/py.png}
-%     \caption[Beispiel einer .py-Datei]{Beispiel einer .py-Datei}
-%   \end{figure}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.7\textwidth]{pictures/ipynb.png}
-%     \caption[Beispiel einer .ipynb-Datei]{Beispiel einer .ipynb-Datei}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}[fragile]{Codebeispiele}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{pictures/examples.png}
-%     \caption[Code-Beispiele]{Code-Beispiele}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}[fragile]{Codebeispiele}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{pictures/class_example.png}
-%     \caption[Code-Beispiel einer Klasse]{Code-Beispiel einer Klasse}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}[fragile]{Beliebtesten Libraries}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{pictures/libraries.jpg}
-%     \caption[Beliebtesten Libraries in Python]{Beliebtesten Libraries in Python}
-%   \end{figure}
-% \end{frame}
-
 \begin{frame}[standout]
   Fragen?
 \end{frame}
@@ -402,7 +313,7 @@
 
 \begin{frame}[allowframebreaks]{Literaturverzeichnis}
 
-  \printbibliography[title={Literaturverzeichnis}]
+  \printbibliography[title={Quellenverzeichnis}]
 
 \end{frame}
 
